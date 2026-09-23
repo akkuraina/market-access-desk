@@ -1,48 +1,31 @@
 import React from "react";
+import { Metadata } from "next";
 import { Badge } from "@/components/ui/Badge";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/Card";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Button } from "@/components/ui/Button";
+import { PartnerNetworkClient } from "@/components/partner/PartnerNetworkClient";
+
+export const metadata: Metadata = {
+  title: "Tier 4: Partner Network (Phase 2 Preview) | Market Access Desk",
+  description:
+    "Preview the Phase 2 Partner & Demand Network. Curated introductions to verified Tier-1 distributors, bonded 3PL warehouses, and institutional buyer consortia.",
+};
 
 export default function PartnerNetworkPage() {
   return (
-    <div className="flex-1 py-16 sm:py-24">
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center text-center space-y-8">
-          <div className="flex items-center gap-2">
-            <Badge variant="slate" size="md">
-              Tier 4 Architecture
-            </Badge>
-            <Badge variant="phase2" size="md">
-              Phase 2 — Coming Soon
-            </Badge>
-          </div>
+    <div className="flex-1 py-12 sm:py-16 lg:py-20 bg-mad-cream relative overflow-hidden">
+      {/* Background Navigation Chart Grid Layer */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden select-none opacity-[0.03]" aria-hidden="true">
+        <svg className="w-full h-full text-mad-green" viewBox="0 0 1000 1000" fill="none">
+          <circle cx="500" cy="500" r="300" stroke="currentColor" strokeWidth="1" strokeDasharray="6 6" />
+          <circle cx="500" cy="500" r="450" stroke="currentColor" strokeWidth="1" strokeDasharray="8 8" />
+          <line x1="500" y1="0" x2="500" y2="1000" stroke="currentColor" strokeWidth="1" strokeDasharray="4 4" />
+          <line x1="0" y1="500" x2="1000" y2="500" stroke="currentColor" strokeWidth="1" strokeDasharray="4 4" />
+        </svg>
+      </div>
 
-          <SectionHeading
-            align="center"
-            title="Tier 4: Demand & Partner Network"
-            subtitle="Connect directly with pre-vetted institutional distributors, verified local buyer consortia, and bonded 3PL logistics partners."
-            size="xl"
-          />
-
-          <Card className="w-full max-w-lg p-8 border-dashed border-mad-slate/30 bg-mad-cream-alt/50">
-            <CardHeader className="items-center text-center pb-6">
-              <span className="font-mono-data text-xs uppercase tracking-widest text-mad-gold font-bold">
-                PARTNER_ECOSYSTEM_REGISTRY
-              </span>
-              <CardTitle className="mt-4">Bilateral Ecosystem Matching</CardTitle>
-              <CardDescription>
-                This module is currently in private preview under Phase 2 rollout. Pre-qualification and network onboarding protocols are actively being indexed.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="flex justify-center gap-3">
-              <Button variant="outline" size="md" disabled>
-                Phase 2 In Development
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <PartnerNetworkClient />
       </div>
     </div>
   );
 }
+
