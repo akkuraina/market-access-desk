@@ -22,24 +22,22 @@ export const Header: React.FC = () => {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-black/10 bg-[#FAF7F0]/90 backdrop-blur-md">
       <div className="mx-auto flex h-16 sm:h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Left: Brand Wordmark & Powered By */}
+        {/* Left: Brand Wordmark & Stacked Attribution */}
         <div className="flex items-center gap-4">
-          <div className="flex flex-col -space-y-0.5 pt-0.5">
-            <Link href="/" className="group flex items-baseline gap-2 transition-opacity hover:opacity-95">
-              <span className="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-[#0A0A0A] leading-none">
-                MAD
+          <Link href="/" className="group flex items-center gap-2.5 transition-opacity hover:opacity-95">
+            <span className="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-[#0A0A0A] leading-none">
+              MAD
+            </span>
+            <div className="flex flex-col border-l border-black/15 pl-2.5 justify-center">
+              <span className="font-display text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-[#0A0A0A] leading-tight">
+                Market Access Desk
               </span>
-              <div className="hidden sm:flex flex-col border-l border-black/15 pl-2">
-                <span className="font-display text-[11px] font-semibold uppercase tracking-wider text-[#0A0A0A] leading-none">
-                  Market Access Desk
-                </span>
+              <div className="flex items-baseline gap-1 text-[10px] sm:text-[11px] font-body text-[#52525B] leading-tight mt-0.5">
+                <span>Powered by</span>
+                <TradePeWordmark asLink={false} className="text-[10px] sm:text-[11px]" />
               </div>
-            </Link>
-            <div className="flex items-baseline gap-1 text-[11px] font-body text-[#52525B] pt-1">
-              <span>Powered by</span>
-              <TradePeWordmark className="text-[11px]" />
             </div>
-          </div>
+          </Link>
         </div>
 
         {/* Center / Right: Desktop Navigation */}
