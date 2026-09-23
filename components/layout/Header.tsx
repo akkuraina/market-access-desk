@@ -22,21 +22,24 @@ export const Header: React.FC = () => {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-black/10 bg-[#FAF7F0]/90 backdrop-blur-md">
       <div className="mx-auto flex h-16 sm:h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Left: Brand Wordmark */}
+        {/* Left: Brand Wordmark & Powered By */}
         <div className="flex items-center gap-4">
-          <Link href="/" className="group flex items-baseline gap-2.5 transition-opacity hover:opacity-95">
-            <span className="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-[#0A0A0A]">
-              MAD
-            </span>
-            <div className="hidden flex-col border-l border-black/15 pl-2.5 sm:flex">
-              <span className="font-display text-xs font-semibold uppercase tracking-wider text-[#0A0A0A]">
-                Market Access Desk
+          <div className="flex flex-col -space-y-0.5 pt-0.5">
+            <Link href="/" className="group flex items-baseline gap-2 transition-opacity hover:opacity-95">
+              <span className="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-[#0A0A0A] leading-none">
+                MAD
               </span>
-              <span className="font-mono-data text-[10px] text-[#52525B]">
-                Direct-Clearing Infrastructure
-              </span>
+              <div className="hidden sm:flex flex-col border-l border-black/15 pl-2">
+                <span className="font-display text-[11px] font-semibold uppercase tracking-wider text-[#0A0A0A] leading-none">
+                  Market Access Desk
+                </span>
+              </div>
+            </Link>
+            <div className="flex items-baseline gap-1 text-[11px] font-body text-[#52525B] pt-1">
+              <span>Powered by</span>
+              <TradePeWordmark className="text-[11px]" />
             </div>
-          </Link>
+          </div>
         </div>
 
         {/* Center / Right: Desktop Navigation */}
@@ -76,16 +79,6 @@ export const Header: React.FC = () => {
 
         {/* Right Corner: Standardized "by TradePe" Attribution & Mobile Menu Toggle */}
         <div className="flex items-center gap-3">
-          <a
-            href="https://tradepe-landing.vercel.app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 rounded-full border border-black/15 bg-white px-3 py-1 text-xs shadow-subtle hover:border-[#FF4D1C]/50 hover:bg-[#FAF7F0] transition-colors"
-            title="Visit TradePe - Direct-Clearing Trade Infrastructure"
-          >
-            <span className="font-body font-normal text-[#52525B]">by</span>
-            <TradePeWordmark asLink={false} />
-          </a>
 
           {/* Mobile hamburger button */}
           <button

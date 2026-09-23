@@ -408,21 +408,21 @@ export const SettlementSetupClient: React.FC = () => {
       {/* ========================================================================= */}
       {/* 4. FLAGSHIP CTA HANDOFF TO TRADEPE ONBOARDING FLOW                        */}
       {/* ========================================================================= */}
-      <div className="rounded-2xl border border-black/10 bg-brand-dark text-white p-8 sm:p-12 shadow-sm relative overflow-hidden">
+      <div className="rounded-2xl border border-black/10 bg-white text-[#0A0A0A] p-8 sm:p-12 shadow-sm relative overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative">
           <div className="lg:col-span-8 space-y-4">
             <div className="flex items-center gap-2">
-              <span className="font-mono-data text-xs text-[#FF4D1C] font-semibold bg-white/10 border border-white/20 px-3 py-1 rounded-full">
+              <span className="font-mono-data text-xs text-[#FF4D1C] font-semibold bg-[#FF4D1C]/10 border border-[#FF4D1C]/20 px-3 py-1 rounded-full">
                 READY FOR LIVE DISPATCH
               </span>
             </div>
 
-            <h3 className="font-display text-3xl sm:text-4xl lg:text-5xl font-normal tracking-tight text-white">
+            <h3 className="font-display text-3xl sm:text-4xl lg:text-5xl font-normal tracking-tight text-[#0A0A0A]">
               Get started with <TradePeWordmark href="https://tradepe-landing.vercel.app" variant="orange" />
             </h3>
 
-            <p className="font-body text-sm sm:text-base text-white/80 max-w-2xl leading-relaxed">
-              Open your dedicated <strong className="text-white font-semibold">{activeMarket.name} ({activeMarket.currencyCode})</strong> virtual collection account today. Accelerate cross-border collections, lock wholesale exchange rates, and eliminate correspondent wire deductions.
+            <p className="font-body text-sm sm:text-base text-[#52525B] max-w-2xl leading-relaxed">
+              Open your dedicated <strong className="text-[#0A0A0A] font-semibold">{activeMarket.name} ({activeMarket.currencyCode})</strong> virtual collection account today. Accelerate cross-border collections, lock wholesale exchange rates, and eliminate correspondent wire deductions.
             </p>
           </div>
 
@@ -444,7 +444,7 @@ export const SettlementSetupClient: React.FC = () => {
               <Button
                 variant="ghost"
                 size="md"
-                className="w-full text-white/70 hover:text-white hover:bg-white/10 font-mono-data text-xs"
+                className="w-full text-[#52525B] hover:text-[#0A0A0A] hover:bg-black/5 font-mono-data text-xs"
               >
                 <span>Recalculate Readiness Diagnostic</span>
               </Button>
