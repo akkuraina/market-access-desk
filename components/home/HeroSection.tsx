@@ -3,182 +3,142 @@
 import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Compass, ShieldCheck, ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Activity } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { ScoreGauge } from "@/components/ui/ScoreGauge";
+import { TradePeWordmark } from "@/components/ui/TradePeWordmark";
+
+const CORRIDOR_TICKER = [
+  { corridor: "IN → UAE", score: 88, clearing: "4.2h", tariff: "0% (CEPA)", status: "Direct Clearing" },
+  { corridor: "IN → UK", score: 74, clearing: "6.5h", tariff: "OSS VAT", status: "AD-1 Routed" },
+  { corridor: "IN → US", score: 68, clearing: "8.0h", tariff: "CBP Verified", status: "ACH Direct" },
+  { corridor: "IN → SG", score: 92, clearing: "3.8h", tariff: "0% (CECA)", status: "FAST Clearing" },
+  { corridor: "IN → DE", score: 81, clearing: "7.1h", tariff: "EU OSS", status: "SEPA Rail" },
+];
 
 export const HeroSection: React.FC = () => {
   return (
-    <section className="relative overflow-hidden border-b border-mad-green/10 py-16 sm:py-24 lg:py-32 bg-mad-cream">
-      {/* Background Navigation Chart / Route Map Motif Layer */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden select-none" aria-hidden="true">
-        <svg
-          className="absolute -top-24 -right-24 h-[750px] w-[750px] sm:h-[900px] sm:w-[900px] text-mad-green stroke-current opacity-[0.045]"
-          viewBox="0 0 800 800"
-          fill="none"
-        >
-          {/* Concentric Great Circles / Latitudes */}
-          <circle cx="400" cy="400" r="120" strokeWidth="1" strokeDasharray="4 6" />
-          <circle cx="400" cy="400" r="240" strokeWidth="1" strokeDasharray="6 8" />
-          <circle cx="400" cy="400" r="360" strokeWidth="1.2" strokeDasharray="3 5" />
-          <circle cx="400" cy="400" r="480" strokeWidth="1" strokeDasharray="8 12" />
-
-          {/* Compass Radial Meridian Rays */}
-          <line x1="400" y1="20" x2="400" y2="780" strokeWidth="1" strokeDasharray="2 4" />
-          <line x1="20" y1="400" x2="780" y2="400" strokeWidth="1" strokeDasharray="2 4" />
-          <line x1="130" y1="130" x2="670" y2="670" strokeWidth="0.8" strokeDasharray="4 6" />
-          <line x1="670" y1="130" x2="130" y2="670" strokeWidth="0.8" strokeDasharray="4 6" />
-
-          {/* Route Arcs between nodes */}
-          <path
-            d="M 160 520 Q 380 220 640 340"
-            strokeWidth="1.5"
-            strokeDasharray="6 6"
-          />
-          <path
-            d="M 220 280 Q 450 480 680 200"
-            strokeWidth="1.5"
-            strokeDasharray="4 8"
-          />
-
-          {/* Navigational Crosshairs */}
-          <g strokeWidth="1">
-            <path d="M 635 340 L 645 340 M 640 335 L 640 345" />
-            <path d="M 155 520 L 165 520 M 160 515 L 160 525" />
-            <path d="M 395 400 L 405 400 M 400 395 L 400 405" />
-            <path d="M 445 480 L 455 480 M 450 475 L 450 485" />
-          </g>
-        </svg>
-
-        {/* Faint Grid Marks */}
-        <div
-          className="absolute inset-0 opacity-[0.02]"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 1px 1px, #0E4D3B 1px, transparent 0)",
-            backgroundSize: "32px 32px",
-          }}
-        />
+    <section className="relative overflow-hidden border-b border-black/10 py-12 sm:py-20 lg:py-24 bg-[#FAF7F0]">
+      {/* Live Corridor Readiness Ticker Strip (Matching TradePe FX Ticker) */}
+      <div className="border-y border-black/10 bg-white py-2.5 mb-10 overflow-hidden select-none">
+        <div className="flex animate-marquee-left whitespace-nowrap gap-8 text-xs font-mono-data text-[#0A0A0A]">
+          {[...CORRIDOR_TICKER, ...CORRIDOR_TICKER, ...CORRIDOR_TICKER].map((item, idx) => (
+            <div key={idx} className="flex items-center gap-3">
+              <span className="font-bold text-[#0A0A0A]">{item.corridor}</span>
+              <span className="px-1.5 py-0.5 rounded bg-black/5 font-semibold text-[#FF4D1C]">
+                SCORE: {item.score}
+              </span>
+              <span className="text-[#52525B]">CLEARING: {item.clearing}</span>
+              <span className="text-[#52525B]">TARIFF: {item.tariff}</span>
+              <span className="flex items-center gap-1 text-[11px] text-emerald-700 font-medium">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-600 animate-pulse" />
+                {item.status}
+              </span>
+              <span className="text-black/20">/</span>
+            </div>
+          ))}
+        </div>
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
-          {/* Left Column: Asymmetric, Confident Editorial Hero */}
+          {/* Left Column: Dense Spec-Sheet Hero */}
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
             className="lg:col-span-7 flex flex-col items-start text-left"
           >
-            {/* Subtle, Left-Aligned Badges */}
+            {/* Stat & Spec Header Badges (Matching TradePe Hero Pattern) */}
             <div className="flex flex-wrap items-center gap-2 mb-6">
-              <Badge variant="subtle" size="xs">
-                <span className="h-1 w-1 rounded-full bg-mad-gold" />
-                Cross-Border Enablement Architecture
+              <Badge variant="subtle" size="sm">
+                5-Tier Architecture
               </Badge>
-              <span className="text-xs text-mad-slate/40 font-mono-data">/</span>
-              <span className="font-mono-data text-[11px] text-mad-slate/80 tracking-wider">
-                PROGRAM_SYS_v1.0
-              </span>
+              <span className="text-xs text-black/20 font-mono-data">·</span>
+              <Badge variant="subtle" size="sm">
+                40+ Corridor Profiles
+              </Badge>
+              <span className="text-xs text-black/20 font-mono-data">·</span>
+              <Badge variant="gold" size="sm">
+                Diagnostic in &lt;2 min
+              </Badge>
             </div>
 
-            {/* Dominant Headline */}
-            <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-mad-green leading-[1.06]">
-              Market Access Desk
+            {/* Dominant Fraunces Headline */}
+            <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-semibold tracking-tight text-[#0A0A0A] leading-[1.08]">
+              Market Access{" "}
+              <span className="font-italic-accent text-[#FF4D1C] font-normal italic">
+                Desk
+              </span>
             </h1>
 
-            {/* Accent-Treated Subheading with Typographic Shift */}
-            <div className="mt-6 font-display text-lg sm:text-xl lg:text-2xl text-mad-ink/90 font-medium leading-relaxed max-w-2xl">
-              The institutional engine for{" "}
-              <span className="font-semibold text-mad-gold relative inline-block">
-                cross-border market readiness
-                <span className="absolute left-0 bottom-0.5 w-full h-[2px] bg-mad-gold/40 rounded-full" />
-              </span>
-              , automated regulatory clearance, and local currency settlement.
-            </div>
+            {/* Dense Spec-Sheet Lead */}
+            <p className="mt-6 font-display text-lg sm:text-xl text-[#0A0A0A]/90 font-normal leading-snug max-w-2xl">
+              Direct-clearing trade enablement for global exporters. Assess quantitative corridor readiness across 12 signals, automate HS-code duty compliance, provision local currency accounts, and underwrite portable export credit.
+            </p>
 
-            {/* Editorial Body Description */}
-            <p className="mt-4 font-body text-sm sm:text-base text-mad-slate leading-relaxed max-w-xl">
-              MAD establishes a definitive five-tier operational protocol for enterprises navigating
-              high-growth international trade corridors — replacing fragmented advisory with verified
-              readiness telemetry and programmatic execution.
+            {/* Technical Subtext */}
+            <p className="mt-3 font-body text-sm text-[#52525B] leading-relaxed max-w-xl">
+              Powered by <TradePeWordmark /> AD-1 banking infrastructure. Bypass correspondent banking delays, eliminate unvetted middlemen, and execute cross-border expansion with deterministic regulatory and settlement certainty.
             </p>
 
             {/* High-Impact Actions */}
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Link href="/readiness-score">
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  transition={{ duration: 0.15 }}
-                >
-                  <Button variant="primary" size="xl" className="group shadow-card">
-                    <span>Calculate Readiness Score</span>
-                    <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-                  </Button>
-                </motion.div>
+                <Button variant="orange" size="lg" className="group shadow-subtle">
+                  <span>Calculate Readiness Score</span>
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Button>
               </Link>
               <Link href="#architecture">
                 <Button variant="secondary" size="lg">
-                  <span>Explore 5 Tiers</span>
+                  <span>Explore 5-Tier Spec</span>
                 </Button>
               </Link>
             </div>
 
-            {/* Micro Telemetry Bar */}
-            <div className="mt-10 pt-6 border-t border-mad-green/10 w-full flex flex-wrap items-center gap-y-2 gap-x-6 text-xs font-mono-data text-mad-slate">
+            {/* Spec-Sheet Telemetry Line */}
+            <div className="mt-10 pt-5 border-t border-black/10 w-full flex flex-wrap items-center gap-y-2 gap-x-6 text-xs font-mono-data text-[#52525B]">
               <div className="flex items-center gap-1.5">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-600" />
-                <span>ACTIVE TIERS: T1–T5</span>
+                <span className="font-semibold text-[#0A0A0A]">TIERS 1–5 ACTIVE</span>
               </div>
-              <span className="text-mad-slate/30">|</span>
-              <div className="flex items-center gap-1.5">
-                <span>DIAGNOSTIC CRITERIA: 24 VECTORS</span>
+              <span className="text-black/20">|</span>
+              <div>
+                <span>DIAGNOSTIC CRITERIA: </span>
+                <strong className="text-[#0A0A0A]">12 WEIGHTED SIGNALS</strong>
               </div>
-              <span className="text-mad-slate/30">|</span>
-              <div className="flex items-center gap-1.5">
-                <span>CURRENCY ROUTING: 18+ CORRIDORS</span>
+              <span className="text-black/20">|</span>
+              <div>
+                <span>SETTLEMENT RAILS: </span>
+                <strong className="text-[#0A0A0A]">GBP · AED · USD · SGD · EUR</strong>
               </div>
             </div>
           </motion.div>
 
           {/* Right Column: High-End ScoreGauge Console Card */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }}
+            transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
             className="lg:col-span-5 flex justify-center w-full"
           >
-            <div className="relative w-full max-w-md rounded-3xl border border-mad-green/15 bg-mad-cream-alt/95 p-6 sm:p-8 shadow-card overflow-hidden">
-              {/* Subtle inner decorative ring & card corner route watermark */}
-              <div className="absolute inset-1.5 rounded-[22px] border border-mad-green/8 pointer-events-none" />
-              
-              <svg
-                className="absolute -bottom-10 -right-10 h-48 w-48 text-mad-green opacity-[0.05] pointer-events-none"
-                viewBox="0 0 200 200"
-                fill="none"
-              >
-                <circle cx="100" cy="100" r="40" stroke="currentColor" strokeWidth="1" strokeDasharray="3 3" />
-                <circle cx="100" cy="100" r="75" stroke="currentColor" strokeWidth="1" strokeDasharray="4 6" />
-                <line x1="100" y1="10" x2="100" y2="190" stroke="currentColor" strokeWidth="1" strokeDasharray="2 3" />
-                <line x1="10" y1="100" x2="190" y2="100" stroke="currentColor" strokeWidth="1" strokeDasharray="2 3" />
-              </svg>
-
+            <div className="relative w-full max-w-md rounded-3xl border border-black/10 bg-white p-6 sm:p-8 shadow-subtle">
               {/* Console Header Bar */}
-              <div className="flex items-center justify-between pb-4 border-b border-mad-green/10 mb-6">
+              <div className="flex items-center justify-between pb-4 border-b border-black/10 mb-6">
                 <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-mad-gold animate-ping" />
-                  <span className="font-mono-data text-xs font-semibold uppercase tracking-wider text-mad-green">
-                    LIVE GAUGE INSTRUMENT
+                  <Activity className="h-4 w-4 text-[#FF4D1C]" />
+                  <span className="font-mono-data text-xs font-bold uppercase tracking-wider text-[#0A0A0A]">
+                    READINESS INSTRUMENT
                   </span>
                 </div>
-                <span className="font-mono-data text-[10px] text-mad-slate/80 bg-mad-cream px-2 py-0.5 rounded border border-mad-green/10">
-                  REF: MAD-INDEX-01
+                <span className="font-mono-data text-[10px] text-[#52525B] bg-[#F4F2EC] px-2 py-0.5 rounded border border-black/10">
+                  SPEC: MAD-T1-DIAG
                 </span>
               </div>
 
-              {/* Enhanced Circular Instrument Gauge */}
+              {/* Enhanced Circular Instrument Gauge (Preserves Precision Instrument Dial) */}
               <ScoreGauge
                 score={72}
                 maxScore={100}
@@ -189,14 +149,14 @@ export const HeroSection: React.FC = () => {
               />
 
               {/* Console Bottom Action Bar */}
-              <div className="mt-6 pt-5 border-t border-mad-green/10 flex items-center justify-between">
+              <div className="mt-6 pt-4 border-t border-black/10 flex items-center justify-between">
                 <div className="text-left">
-                  <p className="font-mono-data text-[10px] text-mad-slate uppercase">Diagnostic Status</p>
-                  <p className="font-display text-xs font-bold text-mad-green">Tier 1 Verification Passed</p>
+                  <p className="font-mono-data text-[10px] text-[#52525B] uppercase">DIAGNOSTIC STATUS</p>
+                  <p className="font-body text-xs font-bold text-[#0A0A0A]">Tier 1 Verification Passed</p>
                 </div>
                 <Link href="/readiness-score">
-                  <span className="inline-flex items-center gap-1 text-xs font-display font-semibold text-mad-green hover:text-mad-green-light group">
-                    <span>Full Diagnostic</span>
+                  <span className="inline-flex items-center gap-1 text-xs font-body font-semibold text-[#0A0A0A] hover:text-[#FF4D1C] transition-colors group">
+                    <span>Launch Diagnostic</span>
                     <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </span>
                 </Link>
@@ -208,3 +168,4 @@ export const HeroSection: React.FC = () => {
     </section>
   );
 };
+

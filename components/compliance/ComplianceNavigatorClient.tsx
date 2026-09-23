@@ -67,13 +67,13 @@ export const ComplianceNavigatorClient: React.FC = () => {
       {/* ========================================================================= */}
       {/* 1. CORRIDOR SELECTION HUB                                                 */}
       {/* ========================================================================= */}
-      <div className="rounded-3xl border border-mad-green/15 bg-mad-cream-alt p-6 sm:p-8 shadow-card">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-mad-green/10">
+      <div className="rounded-3xl border border-black/10 bg-white p-6 sm:p-8 shadow-subtle">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-black/10">
           <div>
-            <span className="font-mono-data text-xs text-mad-gold font-bold uppercase tracking-wider">
+            <span className="font-mono-data text-xs text-[#FF4D1C] font-semibold uppercase tracking-wider">
               CORRIDOR KNOWLEDGE ENGINE
             </span>
-            <h2 className="font-display text-xl sm:text-2xl font-bold text-mad-green mt-1">
+            <h2 className="font-display text-xl sm:text-2xl font-semibold text-[#0A0A0A] mt-1">
               Select Trade Corridor
             </h2>
           </div>
@@ -86,7 +86,7 @@ export const ComplianceNavigatorClient: React.FC = () => {
               className="gap-1.5"
             >
               <Users className="h-4 w-4" />
-              <span>Request Human Review</span>
+              <span>Request Specialist Review</span>
             </Button>
           </div>
         </div>
@@ -102,20 +102,20 @@ export const ComplianceNavigatorClient: React.FC = () => {
                 onClick={() => setSelectedKey(opt.key)}
                 className={`flex flex-col justify-between p-4 rounded-2xl border text-left transition-all ${
                   isSelected
-                    ? "bg-mad-green text-mad-cream border-mad-green shadow-sm ring-2 ring-mad-green/20"
-                    : "bg-mad-cream border-mad-green/15 text-mad-ink hover:border-mad-green/40 hover:bg-white"
+                    ? "bg-[#0A0A0A] text-white border-black shadow-sm"
+                    : "bg-[#FAF7F0] border-black/10 text-[#0A0A0A] hover:border-black/30 hover:bg-white"
                 }`}
               >
                 <div className="flex items-center justify-between w-full">
                   <div className="flex items-center gap-2.5">
                     <span className="text-xl">{opt.flag}</span>
-                    <span className="font-display font-bold text-sm sm:text-base">{opt.label}</span>
+                    <span className="font-body font-semibold text-sm sm:text-base">{opt.label}</span>
                   </div>
-                  {isSelected && <CheckCircle2 className="h-4 w-4 text-mad-gold shrink-0" />}
+                  {isSelected && <CheckCircle2 className="h-4 w-4 text-[#FF4D1C] shrink-0" />}
                 </div>
                 <p
                   className={`font-mono-data text-[11px] mt-2.5 ${
-                    isSelected ? "text-mad-cream/80" : "text-mad-slate"
+                    isSelected ? "text-zinc-300" : "text-[#52525B]"
                   }`}
                 >
                   {opt.desc}
@@ -138,63 +138,51 @@ export const ComplianceNavigatorClient: React.FC = () => {
           transition={{ duration: 0.35, ease: "easeOut" }}
           className="space-y-12"
         >
-          <div className="rounded-3xl border border-mad-green/15 bg-mad-cream-alt p-6 sm:p-10 shadow-card relative overflow-hidden">
-            {/* Background Navigational Chart Watermark */}
-            <svg
-              className="absolute -top-10 -right-10 h-80 w-80 text-mad-green opacity-[0.04] pointer-events-none"
-              viewBox="0 0 300 300"
-              fill="none"
-            >
-              <circle cx="150" cy="150" r="130" stroke="currentColor" strokeWidth="1" strokeDasharray="4 6" />
-              <circle cx="150" cy="150" r="75" stroke="currentColor" strokeWidth="1" strokeDasharray="3 4" />
-              <line x1="150" y1="10" x2="150" y2="290" stroke="currentColor" strokeWidth="1" strokeDasharray="2 3" />
-              <line x1="10" y1="150" x2="290" y2="150" stroke="currentColor" strokeWidth="1" strokeDasharray="2 3" />
-            </svg>
-
+          <div className="rounded-3xl border border-black/10 bg-white p-6 sm:p-10 shadow-subtle relative overflow-hidden">
             <div className="relative space-y-6">
               <div className="flex flex-wrap items-center gap-2.5">
-                <span className="font-mono-data text-xs font-bold text-mad-green bg-mad-green/10 px-3 py-1 rounded-md border border-mad-green/20">
+                <span className="font-mono-data text-xs font-bold text-[#0A0A0A] bg-black/5 px-3 py-1 rounded-md border border-black/10">
                   CORRIDOR: {currentCorridor.corridorTitle}
                 </span>
-                <Badge variant="gold" size="sm">
+                <Badge variant="orange" size="sm">
                   {currentCorridor.treatyStatus}
                 </Badge>
               </div>
 
               <div>
-                <h1 className="font-display text-3xl sm:text-4xl font-extrabold text-mad-green">
+                <h1 className="font-display text-3xl sm:text-4xl font-semibold text-[#0A0A0A]">
                   {currentCorridor.corridorTitle} Compliance Protocol
                 </h1>
-                <p className="mt-2 font-body text-base text-mad-slate max-w-3xl leading-relaxed">
-                  Governed by the <strong className="text-mad-green font-semibold">{currentCorridor.bilateralTreaty}</strong>. {currentCorridor.dutyAdvantageSummary}
+                <p className="mt-2 font-body text-base text-[#52525B] max-w-3xl leading-relaxed">
+                  Governed by the <strong className="text-[#0A0A0A] font-semibold">{currentCorridor.bilateralTreaty}</strong>. {currentCorridor.dutyAdvantageSummary}
                 </p>
               </div>
 
               {/* Corridor Telemetry Cards */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-mad-green/10">
-                <div className="rounded-2xl bg-mad-cream p-4 border border-mad-green/10">
-                  <p className="font-mono-data text-[10px] uppercase text-mad-slate tracking-wider">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-black/10">
+                <div className="rounded-2xl bg-[#FAF7F0] p-4 border border-black/10">
+                  <p className="font-mono-data text-[10px] uppercase text-[#52525B] tracking-wider">
                     BILATERAL TREATY
                   </p>
-                  <p className="font-display text-sm font-bold text-mad-green mt-1">
+                  <p className="font-body text-sm font-bold text-[#0A0A0A] mt-1">
                     {currentCorridor.bilateralTreaty}
                   </p>
                 </div>
 
-                <div className="rounded-2xl bg-mad-cream p-4 border border-mad-green/10">
-                  <p className="font-mono-data text-[10px] uppercase text-mad-slate tracking-wider">
+                <div className="rounded-2xl bg-[#FAF7F0] p-4 border border-black/10">
+                  <p className="font-mono-data text-[10px] uppercase text-[#52525B] tracking-wider">
                     CUSTOMS CLEARANCE SPEED
                   </p>
-                  <p className="font-mono-data text-xl font-bold text-mad-green mt-1">
+                  <p className="font-mono-data text-xl font-bold text-[#0A0A0A] mt-1">
                     {currentCorridor.averageCustomsClearanceDays}
                   </p>
                 </div>
 
-                <div className="rounded-2xl bg-mad-cream p-4 border border-mad-green/10">
-                  <p className="font-mono-data text-[10px] uppercase text-mad-slate tracking-wider">
+                <div className="rounded-2xl bg-[#FAF7F0] p-4 border border-black/10">
+                  <p className="font-mono-data text-[10px] uppercase text-[#52525B] tracking-wider">
                     TYPICAL COMPLIANCE TIMELINE
                   </p>
-                  <p className="font-mono-data text-xl font-bold text-mad-gold mt-1">
+                  <p className="font-mono-data text-xl font-bold text-[#FF4D1C] mt-1">
                     {currentCorridor.overallTimeline}
                   </p>
                 </div>
@@ -209,7 +197,7 @@ export const ComplianceNavigatorClient: React.FC = () => {
           {/* SECTION A: Tax & Registration Requirements */}
           <section className="space-y-6">
             <SectionHeading
-              badge="Regulatory Vector 01"
+              badge="REGULATORY VECTOR 01"
               title="Tax & Corporate Registration Requirements"
               subtitle="Mandatory tax identifiers, non-resident registrations, and export tax exemption instruments."
               size="md"
@@ -220,39 +208,39 @@ export const ComplianceNavigatorClient: React.FC = () => {
                 <Card key={req.id} className="flex flex-col justify-between p-6">
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <span className="font-mono-data text-[11px] font-bold text-mad-green bg-mad-green/10 px-2.5 py-0.5 rounded border border-mad-green/20">
+                      <span className="font-mono-data text-[11px] font-bold text-[#0A0A0A] bg-black/5 px-2.5 py-0.5 rounded border border-black/10">
                         {req.tag}
                       </span>
-                      <span className="font-mono-data text-xs text-mad-slate">
+                      <span className="font-mono-data text-xs text-[#52525B]">
                         ~{req.estimatedDays}
                       </span>
                     </div>
 
                     <div>
-                      <h4 className="font-display text-base font-bold text-mad-green leading-snug">
+                      <h4 className="font-display text-base font-semibold text-[#0A0A0A] leading-snug">
                         {req.title}
                       </h4>
-                      <p className="font-mono-data text-[11px] text-mad-slate mt-0.5">
+                      <p className="font-mono-data text-[11px] text-[#52525B] mt-0.5">
                         Authority: {req.authority}
                       </p>
                     </div>
 
-                    <p className="font-body text-xs text-mad-slate leading-relaxed">
+                    <p className="font-body text-xs text-[#52525B] leading-relaxed">
                       {req.description}
                     </p>
 
-                    <div className="pt-2 space-y-1.5 border-t border-mad-green/10">
+                    <div className="pt-2 space-y-1.5 border-t border-black/10">
                       {req.keyDetails.map((detail, i) => (
-                        <div key={i} className="flex items-start gap-2 text-xs text-mad-ink/80 font-body">
-                          <span className="text-mad-gold mt-0.5 font-bold">›</span>
+                        <div key={i} className="flex items-start gap-2 text-xs text-[#0A0A0A]/85 font-body">
+                          <span className="text-[#FF4D1C] mt-0.5 font-bold">›</span>
                           <span>{detail}</span>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  <div className="pt-4 mt-4 border-t border-mad-green/10 flex items-center justify-between">
-                    <span className="font-mono-data text-[10px] uppercase text-mad-green font-semibold">
+                  <div className="pt-4 mt-4 border-t border-black/10 flex items-center justify-between">
+                    <span className="font-mono-data text-[10px] uppercase text-[#0A0A0A] font-semibold">
                       {req.mandatory ? "● Mandatory Requirement" : "○ Recommended Option"}
                     </span>
                   </div>
@@ -264,7 +252,7 @@ export const ComplianceNavigatorClient: React.FC = () => {
           {/* SECTION B: Licensing & Standards */}
           <section className="space-y-6">
             <SectionHeading
-              badge="Regulatory Vector 02"
+              badge="REGULATORY VECTOR 02"
               title="Licensing & Conformity Assessment"
               subtitle="Product safety standards, bilateral rules of origin certifications, and jurisdictional agency filings."
               size="md"
@@ -274,31 +262,31 @@ export const ComplianceNavigatorClient: React.FC = () => {
               {currentCorridor.licensingAndApprovals.map((lic) => (
                 <Card key={lic.id} className="p-6 space-y-4">
                   <div className="flex items-center justify-between">
-                    <span className="font-mono-data text-[11px] font-bold text-mad-gold bg-mad-gold/15 px-2.5 py-0.5 rounded border border-mad-gold/30">
+                    <span className="font-mono-data text-[11px] font-bold text-[#FF4D1C] bg-[#FF4D1C]/10 px-2.5 py-0.5 rounded border border-[#FF4D1C]/30">
                       {lic.tag}
                     </span>
-                    <span className="font-mono-data text-xs text-mad-slate">
+                    <span className="font-mono-data text-xs text-[#52525B]">
                       Lead Time: {lic.estimatedDays}
                     </span>
                   </div>
 
                   <div>
-                    <h4 className="font-display text-lg font-bold text-mad-green leading-snug">
+                    <h4 className="font-display text-lg font-semibold text-[#0A0A0A] leading-snug">
                       {lic.title}
                     </h4>
-                    <p className="font-mono-data text-xs text-mad-slate mt-0.5">
+                    <p className="font-mono-data text-xs text-[#52525B] mt-0.5">
                       Filing Authority: {lic.authority}
                     </p>
                   </div>
 
-                  <p className="font-body text-sm text-mad-slate leading-relaxed">
+                  <p className="font-body text-sm text-[#52525B] leading-relaxed">
                     {lic.description}
                   </p>
 
-                  <div className="pt-2 space-y-2 border-t border-mad-green/10">
+                  <div className="pt-2 space-y-2 border-t border-black/10">
                     {lic.keyDetails.map((detail, i) => (
-                      <div key={i} className="flex items-start gap-2 text-xs text-mad-ink/85 font-body">
-                        <CheckCircle2 className="h-3.5 w-3.5 text-mad-green shrink-0 mt-0.5" />
+                      <div key={i} className="flex items-start gap-2 text-xs text-[#0A0A0A]/90 font-body">
+                        <CheckCircle2 className="h-3.5 w-3.5 text-[#FF4D1C] shrink-0 mt-0.5" />
                         <span>{detail}</span>
                       </div>
                     ))}
@@ -311,16 +299,16 @@ export const ComplianceNavigatorClient: React.FC = () => {
           {/* SECTION C: Mandatory Documentation Checklist */}
           <section className="space-y-6">
             <SectionHeading
-              badge="Regulatory Vector 03"
+              badge="REGULATORY VECTOR 03"
               title="Customs Documentation & Clearance Vault"
               subtitle="Core electronic manifests, title documents, and trade compliance certificates required for dispatch."
               size="md"
             />
 
-            <div className="rounded-3xl border border-mad-green/15 bg-mad-cream-alt overflow-hidden shadow-card">
+            <div className="rounded-3xl border border-black/10 bg-white overflow-hidden shadow-subtle">
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-sm">
-                  <thead className="border-b border-mad-green/15 bg-mad-green/5 text-mad-green font-display text-xs uppercase tracking-wider font-bold">
+                  <thead className="border-b border-black/10 bg-[#FAF7F0] text-[#0A0A0A] font-mono-data text-xs uppercase tracking-wider font-bold">
                     <tr>
                       <th className="px-6 py-4">Document Title</th>
                       <th className="px-6 py-4">Filing Authority</th>
@@ -329,26 +317,26 @@ export const ComplianceNavigatorClient: React.FC = () => {
                       <th className="px-6 py-4">Status</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-mad-green/10 font-body">
+                  <tbody className="divide-y divide-black/10 font-body">
                     {currentCorridor.mandatoryDocumentation.map((doc, idx) => (
-                      <tr key={idx} className="hover:bg-white/50 transition-colors">
+                      <tr key={idx} className="hover:bg-[#FAF7F0]/60 transition-colors">
                         <td className="px-6 py-4">
-                          <p className="font-display font-bold text-mad-green">{doc.name}</p>
-                          <p className="text-xs text-mad-slate mt-0.5">{doc.purpose}</p>
+                          <p className="font-display font-semibold text-[#0A0A0A]">{doc.name}</p>
+                          <p className="text-xs text-[#52525B] mt-0.5">{doc.purpose}</p>
                         </td>
-                        <td className="px-6 py-4 font-mono-data text-xs text-mad-slate">
+                        <td className="px-6 py-4 font-mono-data text-xs text-[#52525B]">
                           {doc.filingAuthority}
                         </td>
                         <td className="px-6 py-4">
-                          <span className="font-mono-data text-xs px-2 py-0.5 rounded bg-mad-cream border border-mad-green/10">
+                          <span className="font-mono-data text-xs px-2 py-0.5 rounded bg-[#FAF7F0] border border-black/10">
                             {doc.format}
                           </span>
                         </td>
-                        <td className="px-6 py-4 font-mono-data text-xs text-mad-slate">
+                        <td className="px-6 py-4 font-mono-data text-xs text-[#52525B]">
                           {doc.leadTime}
                         </td>
                         <td className="px-6 py-4">
-                          <span className="font-mono-data text-xs font-semibold text-mad-green bg-mad-green/10 px-2.5 py-1 rounded-full border border-mad-green/20">
+                          <span className="font-mono-data text-xs font-semibold text-[#0A0A0A] bg-black/5 px-2.5 py-1 rounded-full border border-black/10">
                             Required
                           </span>
                         </td>
@@ -363,7 +351,7 @@ export const ComplianceNavigatorClient: React.FC = () => {
           {/* SECTION D: Typical Operational Timeline & Milestone Roadmap */}
           <section className="space-y-6">
             <SectionHeading
-              badge="Regulatory Vector 04"
+              badge="REGULATORY VECTOR 04"
               title="Corridor Milestone Execution Roadmap"
               subtitle="Sequential operational phases from initial export licensing through port clearance and currency receipt."
               size="md"
@@ -373,30 +361,30 @@ export const ComplianceNavigatorClient: React.FC = () => {
               {currentCorridor.timelineMilestones.map((ms, idx) => (
                 <div
                   key={idx}
-                  className="rounded-3xl border border-mad-green/15 bg-mad-cream-alt p-6 flex flex-col justify-between space-y-4 hover:border-mad-green/35 transition-all shadow-card"
+                  className="rounded-3xl border border-black/10 bg-white p-6 flex flex-col justify-between space-y-4 hover:border-black/30 transition-all shadow-subtle"
                 >
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
-                      <span className="font-mono-data text-xs font-bold text-mad-gold bg-mad-gold/15 px-2.5 py-0.5 rounded border border-mad-gold/30">
+                      <span className="font-mono-data text-xs font-bold text-[#FF4D1C] bg-[#FF4D1C]/10 px-2.5 py-0.5 rounded border border-[#FF4D1C]/25">
                         {ms.phase}
                       </span>
-                      <span className="font-mono-data text-xs text-mad-slate">
+                      <span className="font-mono-data text-xs text-[#52525B]">
                         {ms.timeframe}
                       </span>
                     </div>
 
-                    <h4 className="font-display text-base font-bold text-mad-green pt-1">
+                    <h4 className="font-display text-base font-semibold text-[#0A0A0A] pt-1">
                       {ms.title}
                     </h4>
 
-                    <p className="font-body text-xs text-mad-slate leading-relaxed">
+                    <p className="font-body text-xs text-[#52525B] leading-relaxed">
                       {ms.description}
                     </p>
                   </div>
 
-                  <div className="pt-3 border-t border-mad-green/10">
-                    <p className="font-mono-data text-[10px] uppercase text-mad-slate">Key Deliverable</p>
-                    <p className="font-display text-xs font-semibold text-mad-green mt-0.5">
+                  <div className="pt-3 border-t border-black/10">
+                    <p className="font-mono-data text-[10px] uppercase text-[#52525B]">Key Deliverable</p>
+                    <p className="font-body text-xs font-semibold text-[#0A0A0A] mt-0.5">
                       {ms.deliverable}
                     </p>
                   </div>
@@ -408,17 +396,17 @@ export const ComplianceNavigatorClient: React.FC = () => {
           {/* ========================================================================= */}
           {/* 4. VISIBLE, LEGALLY SOUND DISCLAIMER NOTICE                               */}
           {/* ========================================================================= */}
-          <div className="rounded-2xl border border-mad-slate/20 bg-mad-cream-alt/70 p-5 sm:p-6 shadow-sm">
+          <div className="rounded-2xl border border-black/10 bg-white p-5 sm:p-6 shadow-subtle">
             <div className="flex items-start gap-3.5">
-              <div className="h-5 w-5 rounded-full bg-mad-slate/15 text-mad-slate flex items-center justify-center shrink-0 mt-0.5">
+              <div className="h-5 w-5 rounded-full bg-black/5 text-[#52525B] flex items-center justify-center shrink-0 mt-0.5">
                 <Info className="h-3.5 w-3.5" />
               </div>
               <div className="space-y-1">
-                <p className="font-display font-semibold text-xs text-mad-ink">
+                <p className="font-display font-semibold text-xs text-[#0A0A0A]">
                   Regulatory & Compliance Advisory Notice
                 </p>
-                <p className="font-body text-xs text-mad-slate leading-relaxed">
-                  This information is for planning purposes only and does not constitute legal, customs brokerage, or tax advice. Bilateral tariff schedules, partner government agency requirements, and exchange control regulations are subject to ongoing administrative updates. Consult a qualified professional or licensed customs attorney for your enterprise's specific operational parameters.
+                <p className="font-body text-xs text-[#52525B] leading-relaxed">
+                  This information is for planning purposes only and does not constitute legal, customs brokerage, or tax advice. Bilateral tariff schedules, partner government agency requirements, and exchange control regulations are subject to ongoing administrative updates. Consult a qualified professional or licensed customs attorney for your enterprise&apos;s specific operational parameters.
                 </p>
               </div>
             </div>
@@ -427,23 +415,23 @@ export const ComplianceNavigatorClient: React.FC = () => {
           {/* ========================================================================= */}
           {/* 5. TIER 2 → TIER 3 SETTLEMENT ACTION BRIDGE                               */}
           {/* ========================================================================= */}
-          <div className="rounded-3xl border-2 border-mad-green bg-mad-green text-mad-cream p-8 sm:p-10 shadow-card">
+          <div className="rounded-3xl border border-black bg-[#0A0A0A] text-white p-8 sm:p-10 shadow-card">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-8 space-y-3">
-                <span className="font-mono-data text-xs text-mad-gold font-bold bg-mad-gold/15 border border-mad-gold/30 px-2.5 py-1 rounded-full">
+                <span className="font-mono-data text-xs text-[#FF4D1C] font-semibold bg-[#FF4D1C]/15 border border-[#FF4D1C]/30 px-2.5 py-1 rounded-full">
                   TIER 2 → TIER 3 CROSS-BORDER BRIDGE
                 </span>
-                <h3 className="font-display text-2xl sm:text-3xl font-extrabold text-mad-cream">
-                  Establish Local Settlement in {currentCorridor.targetMarket}
+                <h3 className="font-display text-2xl sm:text-3xl font-semibold text-white">
+                  Establish Direct Local Settlement in {currentCorridor.targetMarket}
                 </h3>
-                <p className="font-body text-sm text-mad-cream/80 max-w-2xl leading-relaxed">
-                  Once your documentation and customs compliance are in order, configure your local collection account, automated escrow milestones, and direct INR settlement rails.
+                <p className="font-body text-sm text-zinc-300 max-w-2xl leading-relaxed">
+                  Once your documentation and customs compliance are in order, configure your dedicated local collection account, automated escrow milestones, and direct INR settlement rails.
                 </p>
               </div>
 
               <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3 justify-end">
                 <Link href={`/settlement-setup?target=${encodeURIComponent(currentCorridor.targetMarket)}`}>
-                  <Button variant="gold" size="lg" className="w-full justify-between group">
+                  <Button variant="orange" size="lg" className="w-full justify-between group">
                     <span>Configure Banking Setup</span>
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </Button>
@@ -452,9 +440,9 @@ export const ComplianceNavigatorClient: React.FC = () => {
                   variant="ghost"
                   size="md"
                   onClick={() => setHumanReviewModalOpen(true)}
-                  className="w-full text-mad-cream/80 hover:text-mad-cream hover:bg-mad-cream/10 font-mono-data text-xs"
+                  className="w-full text-zinc-300 hover:text-white hover:bg-white/10 font-mono-data text-xs"
                 >
-                  <span>Request Human Review with Desk</span>
+                  <span>Request Specialist Review</span>
                 </Button>
               </div>
             </div>
@@ -466,17 +454,17 @@ export const ComplianceNavigatorClient: React.FC = () => {
       {/* 6. "REQUEST HUMAN REVIEW" MODAL (SEMI-AUTOMATED HYBRID MODEL AFFORDANCE)  */}
       {/* ========================================================================= */}
       {humanReviewModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-mad-ink/60 backdrop-blur-sm p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
-            className="w-full max-w-lg rounded-3xl border border-mad-green/20 bg-mad-cream p-6 sm:p-8 shadow-2xl relative"
+            className="w-full max-w-lg rounded-3xl border border-black/10 bg-white p-6 sm:p-8 shadow-2xl relative"
           >
             <button
               type="button"
               onClick={() => setHumanReviewModalOpen(false)}
-              className="absolute right-5 top-5 p-2 rounded-xl text-mad-slate hover:bg-mad-cream-alt hover:text-mad-ink"
+              className="absolute right-5 top-5 p-2 rounded-xl text-[#52525B] hover:bg-black/5 hover:text-[#0A0A0A]"
             >
               <X className="h-5 w-5" />
             </button>
@@ -484,20 +472,20 @@ export const ComplianceNavigatorClient: React.FC = () => {
             {!reviewSubmitted ? (
               <form onSubmit={handleReviewSubmit} className="space-y-5">
                 <div>
-                  <Badge variant="gold" size="sm">
-                    Human-in-the-Loop Consultation
+                  <Badge variant="orange" size="sm">
+                    Specialist Consultation Desk
                   </Badge>
-                  <h3 className="font-display text-2xl font-bold text-mad-green mt-2">
+                  <h3 className="font-display text-2xl font-semibold text-[#0A0A0A] mt-2">
                     Request Compliance Specialist Review
                   </h3>
-                  <p className="font-body text-xs sm:text-sm text-mad-slate mt-1">
+                  <p className="font-body text-xs sm:text-sm text-[#52525B] mt-1">
                     Connect your {currentCorridor.corridorTitle} expansion plan with a dedicated MAD trade attorney or licensed customs broker for tailored legal validation.
                   </p>
                 </div>
 
                 <div className="space-y-3">
                   <div>
-                    <label className="font-display text-xs font-bold text-mad-green block mb-1">
+                    <label className="font-display text-xs font-semibold text-[#0A0A0A] block mb-1">
                       Business Work Email
                     </label>
                     <input
@@ -506,12 +494,12 @@ export const ComplianceNavigatorClient: React.FC = () => {
                       value={reviewEmail}
                       onChange={(e) => setReviewEmail(e.target.value)}
                       placeholder="compliance@enterprise.com"
-                      className="w-full rounded-xl border border-mad-green/20 bg-white p-3 font-body text-sm text-mad-ink placeholder:text-mad-slate/50 focus:outline-none focus:ring-2 focus:ring-mad-green"
+                      className="w-full rounded-xl border border-black/20 bg-white p-3 font-body text-sm text-[#0A0A0A] placeholder:text-[#52525B]/50 focus:outline-none focus:ring-2 focus:ring-[#FF4D1C]"
                     />
                   </div>
 
                   <div>
-                    <label className="font-display text-xs font-bold text-mad-green block mb-1">
+                    <label className="font-display text-xs font-semibold text-[#0A0A0A] block mb-1">
                       Product HS Codes or Specific Questions
                     </label>
                     <textarea
@@ -519,11 +507,11 @@ export const ComplianceNavigatorClient: React.FC = () => {
                       value={reviewNotes}
                       onChange={(e) => setReviewNotes(e.target.value)}
                       placeholder="e.g., HS 6204.42 (Woven cotton apparel) — requesting CEPA origin rule verification..."
-                      className="w-full rounded-xl border border-mad-green/20 bg-white p-3 font-body text-sm text-mad-ink placeholder:text-mad-slate/50 focus:outline-none focus:ring-2 focus:ring-mad-green"
+                      className="w-full rounded-xl border border-black/20 bg-white p-3 font-body text-sm text-[#0A0A0A] placeholder:text-[#52525B]/50 focus:outline-none focus:ring-2 focus:ring-[#FF4D1C]"
                     />
                   </div>
 
-                  <div className="rounded-xl bg-mad-cream-alt p-3 text-xs text-mad-slate font-mono-data">
+                  <div className="rounded-xl bg-[#FAF7F0] p-3 text-xs text-[#52525B] font-mono-data">
                     <span>CORRIDOR: {currentCorridor.corridorTitle}</span>
                     <br />
                     <span>DESK_SLA: 24–48 Business Hours Response</span>
@@ -539,7 +527,7 @@ export const ComplianceNavigatorClient: React.FC = () => {
                   >
                     Cancel
                   </Button>
-                  <Button type="submit" variant="primary" size="md" className="gap-1.5">
+                  <Button type="submit" variant="orange" size="md" className="gap-1.5">
                     <Send className="h-4 w-4" />
                     <span>Submit Review Request</span>
                   </Button>
@@ -547,14 +535,14 @@ export const ComplianceNavigatorClient: React.FC = () => {
               </form>
             ) : (
               <div className="text-center py-8 space-y-4">
-                <div className="h-12 w-12 rounded-full bg-mad-green/10 text-mad-green flex items-center justify-center mx-auto">
+                <div className="h-12 w-12 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center mx-auto">
                   <CheckCircle2 className="h-6 w-6" />
                 </div>
-                <h3 className="font-display text-2xl font-bold text-mad-green">
+                <h3 className="font-display text-2xl font-semibold text-[#0A0A0A]">
                   Review Request Dispatched
                 </h3>
-                <p className="font-body text-sm text-mad-slate max-w-sm mx-auto">
-                  Your trade compliance dossier for <strong className="text-mad-green">{currentCorridor.corridorTitle}</strong> has been assigned to the MAD legal desk. A specialist will follow up shortly.
+                <p className="font-body text-sm text-[#52525B] max-w-sm mx-auto">
+                  Your trade compliance dossier for <strong className="text-[#0A0A0A]">{currentCorridor.corridorTitle}</strong> has been assigned to the MAD legal desk. A specialist will follow up shortly.
                 </p>
               </div>
             )}
@@ -564,3 +552,4 @@ export const ComplianceNavigatorClient: React.FC = () => {
     </div>
   );
 };
+

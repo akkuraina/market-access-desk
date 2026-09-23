@@ -178,17 +178,17 @@ export const ReadinessCalculator: React.FC = () => {
             className="mx-auto max-w-3xl"
           >
             {/* Wizard Header Progress Bar matching Instrument Dial aesthetic */}
-            <div className="rounded-3xl border border-mad-green/15 bg-mad-cream-alt p-6 sm:p-8 shadow-card mb-8">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-mad-green/10">
+            <div className="rounded-2xl border border-black/10 bg-white p-6 sm:p-8 shadow-sm mb-8">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-black/10">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-mad-green text-mad-cream font-mono-data text-xs font-bold shadow-sm">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-dark text-white font-mono-data text-xs font-semibold shadow-sm">
                     0{currentStep}
                   </div>
                   <div>
-                    <p className="font-mono-data text-[11px] text-mad-slate uppercase tracking-wider">
+                    <p className="font-mono-data text-[11px] text-brand-muted uppercase tracking-wider">
                       DIAGNOSTIC VECTOR {currentStep} OF {totalSteps}
                     </p>
-                    <h3 className="font-display text-base font-bold text-mad-green">
+                    <h3 className="font-display text-base font-normal text-brand-dark">
                       {currentStep === 1 && "Select Home Jurisdiction"}
                       {currentStep === 2 && "Select Commercial Sector"}
                       {currentStep === 3 && "Select Target Expansion Corridor"}
@@ -199,22 +199,22 @@ export const ReadinessCalculator: React.FC = () => {
                 </div>
 
                 {/* Progress Dial Arc Indicator */}
-                <div className="flex items-center gap-2 font-mono-data text-xs text-mad-slate">
+                <div className="flex items-center gap-2 font-mono-data text-xs text-brand-muted">
                   <div className="flex gap-1.5">
                     {Array.from({ length: totalSteps }, (_, i) => (
                       <div
                         key={i}
                         className={`h-2 rounded-full transition-all duration-300 ${
                           i + 1 === currentStep
-                            ? "w-8 bg-mad-gold"
+                            ? "w-8 bg-[#FF4D1C]"
                             : i + 1 < currentStep
-                            ? "w-4 bg-mad-green"
-                            : "w-4 bg-mad-green/15"
+                            ? "w-4 bg-brand-dark"
+                            : "w-4 bg-black/10"
                         }`}
                       />
                     ))}
                   </div>
-                  <span className="ml-1 text-mad-green font-semibold">
+                  <span className="ml-1 text-brand-dark font-semibold">
                     {Math.round((currentStep / totalSteps) * 100)}%
                   </span>
                 </div>
@@ -235,10 +235,10 @@ export const ReadinessCalculator: React.FC = () => {
                       className="space-y-4"
                     >
                       <div>
-                        <h2 className="font-display text-xl sm:text-2xl font-bold text-mad-green">
+                        <h2 className="font-display text-xl sm:text-2xl font-normal text-brand-dark">
                           Where is your enterprise headquartered?
                         </h2>
-                        <p className="font-body text-sm text-mad-slate mt-1">
+                        <p className="font-body text-sm text-brand-muted mt-1">
                           Determines origin tax regimes, domestic export licensing (e.g. IEC / GST LUT in India), and bilateral treaty eligibility.
                         </p>
                       </div>
@@ -253,26 +253,26 @@ export const ReadinessCalculator: React.FC = () => {
                               role="radio"
                               aria-checked={isSelected}
                               onClick={() => setFormData({ ...formData, homeMarket: m.value })}
-                              className={`flex items-center justify-between p-4 rounded-2xl border text-left transition-all ${
+                              className={`flex items-center justify-between p-4 rounded-xl border text-left transition-all ${
                                 isSelected
-                                  ? "bg-mad-green text-mad-cream border-mad-green shadow-sm ring-2 ring-mad-green/20"
-                                  : "bg-mad-cream border-mad-green/15 text-mad-ink hover:border-mad-green/40 hover:bg-white"
+                                  ? "bg-brand-dark text-white border-brand-dark shadow-sm ring-2 ring-black/20"
+                                  : "bg-[#F4F2EC] border-black/10 text-brand-dark hover:border-black/30 hover:bg-white"
                               }`}
                             >
                               <div className="flex items-center gap-3">
                                 <span className="text-2xl">{m.flag}</span>
                                 <div>
-                                  <p className="font-display font-bold text-sm">{m.label}</p>
+                                  <p className="font-body font-semibold text-sm">{m.label}</p>
                                   <p
                                     className={`font-mono-data text-[11px] ${
-                                      isSelected ? "text-mad-cream/70" : "text-mad-slate"
+                                      isSelected ? "text-white/70" : "text-brand-muted"
                                     }`}
                                   >
                                     ORIGIN JURISDICTION
                                   </p>
                                 </div>
                               </div>
-                              {isSelected && <Check className="h-5 w-5 text-mad-gold" />}
+                              {isSelected && <Check className="h-5 w-5 text-[#FF4D1C]" />}
                             </button>
                           );
                         })}
@@ -292,10 +292,10 @@ export const ReadinessCalculator: React.FC = () => {
                       className="space-y-4"
                     >
                       <div>
-                        <h2 className="font-display text-xl sm:text-2xl font-bold text-mad-green">
+                        <h2 className="font-display text-xl sm:text-2xl font-normal text-brand-dark">
                           What is your primary product or service vertical?
                         </h2>
-                        <p className="font-body text-sm text-mad-slate mt-1">
+                        <p className="font-body text-sm text-brand-muted mt-1">
                           Applies sector-specific compliance weightings (e.g. testing standards, phytosanitary checks, or digital fulfillment).
                         </p>
                       </div>
@@ -310,19 +310,19 @@ export const ReadinessCalculator: React.FC = () => {
                               role="radio"
                               aria-checked={isSelected}
                               onClick={() => setFormData({ ...formData, industry: ind.value })}
-                              className={`flex flex-col justify-between p-4 rounded-2xl border text-left transition-all ${
+                              className={`flex flex-col justify-between p-4 rounded-xl border text-left transition-all ${
                                 isSelected
-                                  ? "bg-mad-green text-mad-cream border-mad-green shadow-sm ring-2 ring-mad-green/20"
-                                  : "bg-mad-cream border-mad-green/15 text-mad-ink hover:border-mad-green/40 hover:bg-white"
+                                  ? "bg-brand-dark text-white border-brand-dark shadow-sm ring-2 ring-black/20"
+                                  : "bg-[#F4F2EC] border-black/10 text-brand-dark hover:border-black/30 hover:bg-white"
                               }`}
                             >
                               <div className="flex items-start justify-between w-full">
-                                <p className="font-display font-bold text-sm">{ind.label}</p>
-                                {isSelected && <Check className="h-4 w-4 text-mad-gold shrink-0 ml-2" />}
+                                <p className="font-body font-semibold text-sm">{ind.label}</p>
+                                {isSelected && <Check className="h-4 w-4 text-[#FF4D1C] shrink-0 ml-2" />}
                               </div>
                               <p
                                 className={`font-body text-xs mt-2 leading-relaxed ${
-                                  isSelected ? "text-mad-cream/80" : "text-mad-slate"
+                                  isSelected ? "text-white/80" : "text-brand-muted"
                                 }`}
                               >
                                 {ind.desc}
@@ -346,10 +346,10 @@ export const ReadinessCalculator: React.FC = () => {
                       className="space-y-4"
                     >
                       <div>
-                        <h2 className="font-display text-xl sm:text-2xl font-bold text-mad-green">
+                        <h2 className="font-display text-xl sm:text-2xl font-normal text-brand-dark">
                           Which target market are you evaluating for entry?
                         </h2>
-                        <p className="font-body text-sm text-mad-slate mt-1">
+                        <p className="font-body text-sm text-brand-muted mt-1">
                           Evaluates bilateral trade treaties, customs entry bonds, import licensing friction, and currency settlement options.
                         </p>
                       </div>
@@ -364,19 +364,19 @@ export const ReadinessCalculator: React.FC = () => {
                               role="radio"
                               aria-checked={isSelected}
                               onClick={() => setFormData({ ...formData, targetMarket: tm.value })}
-                              className={`flex items-center justify-between p-4 rounded-2xl border text-left transition-all ${
+                              className={`flex items-center justify-between p-4 rounded-xl border text-left transition-all ${
                                 isSelected
-                                  ? "bg-mad-green text-mad-cream border-mad-green shadow-sm ring-2 ring-mad-green/20"
-                                  : "bg-mad-cream border-mad-green/15 text-mad-ink hover:border-mad-green/40 hover:bg-white"
+                                  ? "bg-brand-dark text-white border-brand-dark shadow-sm ring-2 ring-black/20"
+                                  : "bg-[#F4F2EC] border-black/10 text-brand-dark hover:border-black/30 hover:bg-white"
                               }`}
                             >
                               <div className="flex items-center gap-3.5">
                                 <span className="text-2xl">{tm.flag}</span>
                                 <div>
-                                  <p className="font-display font-bold text-base">{tm.label}</p>
+                                  <p className="font-body font-semibold text-base">{tm.label}</p>
                                   <p
                                     className={`font-mono-data text-xs ${
-                                      isSelected ? "text-mad-cream/80" : "text-mad-slate"
+                                      isSelected ? "text-white/80" : "text-brand-muted"
                                     }`}
                                   >
                                     {tm.region}
@@ -385,11 +385,11 @@ export const ReadinessCalculator: React.FC = () => {
                               </div>
                               {isSelected ? (
                                 <div className="flex items-center gap-2">
-                                  <span className="font-mono-data text-xs text-mad-gold font-bold">SELECTED CORRIDOR</span>
-                                  <Check className="h-5 w-5 text-mad-gold" />
+                                  <span className="font-mono-data text-xs text-[#FF4D1C] font-semibold">SELECTED CORRIDOR</span>
+                                  <Check className="h-5 w-5 text-[#FF4D1C]" />
                                 </div>
                               ) : (
-                                <span className="font-mono-data text-xs text-mad-slate/60">Select</span>
+                                <span className="font-mono-data text-xs text-brand-muted/60">Select</span>
                               )}
                             </button>
                           );
@@ -410,10 +410,10 @@ export const ReadinessCalculator: React.FC = () => {
                       className="space-y-4"
                     >
                       <div>
-                        <h2 className="font-display text-xl sm:text-2xl font-bold text-mad-green">
+                        <h2 className="font-display text-xl sm:text-2xl font-normal text-brand-dark">
                           What is your current approximate annual export revenue?
                         </h2>
-                        <p className="font-body text-sm text-mad-slate mt-1">
+                        <p className="font-body text-sm text-brand-muted mt-1">
                           Assesses working capital depth for customs bonds, international escrow buffers, and localized marketing support.
                         </p>
                       </div>
@@ -428,25 +428,25 @@ export const ReadinessCalculator: React.FC = () => {
                               role="radio"
                               aria-checked={isSelected}
                               onClick={() => setFormData({ ...formData, exportRevenue: rev.value })}
-                              className={`flex flex-col justify-between p-5 rounded-2xl border text-left transition-all ${
+                              className={`flex flex-col justify-between p-5 rounded-xl border text-left transition-all ${
                                 isSelected
-                                  ? "bg-mad-green text-mad-cream border-mad-green shadow-sm ring-2 ring-mad-green/20"
-                                  : "bg-mad-cream border-mad-green/15 text-mad-ink hover:border-mad-green/40 hover:bg-white"
+                                  ? "bg-brand-dark text-white border-brand-dark shadow-sm ring-2 ring-black/20"
+                                  : "bg-[#F4F2EC] border-black/10 text-brand-dark hover:border-black/30 hover:bg-white"
                               }`}
                             >
                               <div className="flex items-center justify-between">
                                 <span
-                                  className={`font-mono-data text-base font-bold ${
-                                    isSelected ? "text-mad-gold" : "text-mad-green"
+                                  className={`font-mono-data text-base font-semibold ${
+                                    isSelected ? "text-[#FF4D1C]" : "text-brand-dark"
                                   }`}
                                 >
                                   {rev.label}
                                 </span>
-                                {isSelected && <Check className="h-4 w-4 text-mad-gold" />}
+                                {isSelected && <Check className="h-4 w-4 text-[#FF4D1C]" />}
                               </div>
                               <p
                                 className={`font-body text-xs mt-3 ${
-                                  isSelected ? "text-mad-cream/80" : "text-mad-slate"
+                                  isSelected ? "text-white/80" : "text-brand-muted"
                                 }`}
                               >
                                 {rev.subtext}
@@ -470,10 +470,10 @@ export const ReadinessCalculator: React.FC = () => {
                       className="space-y-4"
                     >
                       <div>
-                        <h2 className="font-display text-xl sm:text-2xl font-bold text-mad-green">
+                        <h2 className="font-display text-xl sm:text-2xl font-normal text-brand-dark">
                           What is your enterprise's cross-border export experience?
                         </h2>
-                        <p className="font-body text-sm text-mad-slate mt-1">
+                        <p className="font-body text-sm text-brand-muted mt-1">
                           Evaluates existing logistics maturity, customs filing experience, and multi-currency billing readiness.
                         </p>
                       </div>
@@ -488,17 +488,17 @@ export const ReadinessCalculator: React.FC = () => {
                               role="radio"
                               aria-checked={isSelected}
                               onClick={() => setFormData({ ...formData, exportExperience: exp.value })}
-                              className={`flex items-start justify-between w-full p-4 sm:p-5 rounded-2xl border text-left transition-all ${
+                              className={`flex items-start justify-between w-full p-4 sm:p-5 rounded-xl border text-left transition-all ${
                                 isSelected
-                                  ? "bg-mad-green text-mad-cream border-mad-green shadow-sm ring-2 ring-mad-green/20"
-                                  : "bg-mad-cream border-mad-green/15 text-mad-ink hover:border-mad-green/40 hover:bg-white"
+                                  ? "bg-brand-dark text-white border-brand-dark shadow-sm ring-2 ring-black/20"
+                                  : "bg-[#F4F2EC] border-black/10 text-brand-dark hover:border-black/30 hover:bg-white"
                               }`}
                             >
                               <div className="space-y-1 max-w-xl">
-                                <p className="font-display font-bold text-base">{exp.label}</p>
+                                <p className="font-body font-semibold text-base">{exp.label}</p>
                                 <p
                                   className={`font-body text-xs sm:text-sm leading-relaxed ${
-                                    isSelected ? "text-mad-cream/80" : "text-mad-slate"
+                                    isSelected ? "text-white/80" : "text-brand-muted"
                                   }`}
                                 >
                                   {exp.desc}
@@ -508,8 +508,8 @@ export const ReadinessCalculator: React.FC = () => {
                                 <div
                                   className={`h-5 w-5 rounded-full border flex items-center justify-center ${
                                     isSelected
-                                      ? "border-mad-gold bg-mad-gold text-mad-ink"
-                                      : "border-mad-slate/40 bg-transparent"
+                                      ? "border-[#FF4D1C] bg-[#FF4D1C] text-white"
+                                      : "border-black/30 bg-transparent"
                                   }`}
                                 >
                                   {isSelected && <Check className="h-3.5 w-3.5 font-bold" />}
@@ -525,9 +525,9 @@ export const ReadinessCalculator: React.FC = () => {
                 </AnimatePresence>
 
                 {/* Form Action Controls */}
-                <div className="mt-8 pt-6 border-t border-mad-green/10 flex items-center justify-between">
+                <div className="mt-8 pt-6 border-t border-black/10 flex items-center justify-between">
                   <Button
-                    variant="outline"
+                    variant="secondary"
                     size="md"
                     onClick={handleBack}
                     disabled={currentStep === 1}
@@ -537,7 +537,7 @@ export const ReadinessCalculator: React.FC = () => {
                     <span>Back</span>
                   </Button>
 
-                  <Button variant="primary" size="lg" onClick={handleNext} className="group">
+                  <Button variant="orange" size="lg" onClick={handleNext} className="group">
                     <span>{currentStep === totalSteps ? "Generate Readiness Score" : "Next Factor"}</span>
                     <ArrowRight className="h-4 w-4 ml-1.5 transition-transform group-hover:translate-x-1" />
                   </Button>
@@ -559,27 +559,15 @@ export const ReadinessCalculator: React.FC = () => {
               className="space-y-12"
             >
               {/* Results Top Hero Card */}
-              <div className="rounded-3xl border border-mad-green/15 bg-mad-cream-alt p-6 sm:p-10 shadow-card relative overflow-hidden">
-                {/* Background Navigational Chart Motif Watermark */}
-                <svg
-                  className="absolute -top-12 -right-12 h-96 w-96 text-mad-green opacity-[0.04] pointer-events-none"
-                  viewBox="0 0 400 400"
-                  fill="none"
-                >
-                  <circle cx="200" cy="200" r="180" stroke="currentColor" strokeWidth="1" strokeDasharray="4 6" />
-                  <circle cx="200" cy="200" r="100" stroke="currentColor" strokeWidth="1" strokeDasharray="3 4" />
-                  <line x1="200" y1="10" x2="200" y2="390" stroke="currentColor" strokeWidth="1" strokeDasharray="2 3" />
-                  <line x1="10" y1="200" x2="390" y2="200" stroke="currentColor" strokeWidth="1" strokeDasharray="2 3" />
-                </svg>
-
+              <div className="rounded-3xl border border-black/10 bg-white p-6 sm:p-10 shadow-subtle relative overflow-hidden">
                 <div className="relative">
                   {/* Top Bar: Corridor Breadcrumb & Actions */}
-                  <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-mad-green/10">
+                  <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-black/10">
                     <div className="flex items-center gap-2.5">
-                      <span className="font-mono-data text-xs font-bold text-mad-green bg-mad-green/10 px-3 py-1 rounded-md border border-mad-green/20">
+                      <span className="font-mono-data text-xs font-bold text-[#0A0A0A] bg-black/5 px-3 py-1 rounded-md border border-black/10">
                         CORRIDOR: {result.corridorCode}
                       </span>
-                      <Badge variant="gold" size="sm">
+                      <Badge variant="orange" size="sm">
                         {result.scoreBand}
                       </Badge>
                     </div>
@@ -587,7 +575,7 @@ export const ReadinessCalculator: React.FC = () => {
                     <button
                       type="button"
                       onClick={handleReset}
-                      className="inline-flex items-center gap-1.5 text-xs font-mono-data text-mad-slate hover:text-mad-green px-3 py-1.5 rounded-lg border border-mad-green/15 bg-mad-cream hover:bg-white transition-colors"
+                      className="inline-flex items-center gap-1.5 text-xs font-mono-data text-[#52525B] hover:text-[#0A0A0A] px-3 py-1.5 rounded-lg border border-black/15 bg-white hover:bg-[#F4F2EC] transition-colors"
                     >
                       <RotateCcw className="h-3.5 w-3.5" />
                       <span>Modify Parameters</span>
@@ -611,27 +599,27 @@ export const ReadinessCalculator: React.FC = () => {
                     {/* Right: Telemetry & Executive Summary */}
                     <div className="lg:col-span-7 space-y-6">
                       <div>
-                        <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-mad-green">
+                        <h2 className="font-display text-2xl sm:text-3xl font-semibold text-[#0A0A0A]">
                           Corridor Access Analysis
                         </h2>
-                        <p className="mt-2 font-body text-sm sm:text-base text-mad-slate leading-relaxed">
+                        <p className="mt-2 font-body text-sm sm:text-base text-[#52525B] leading-relaxed">
                           {result.corridorSummary}
                         </p>
                       </div>
 
                       {/* Primary Diagnostic Metrics Row */}
-                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4 border-t border-mad-green/10">
-                        <div className="rounded-2xl bg-mad-cream p-4 border border-mad-green/10">
-                          <p className="font-mono-data text-[10px] uppercase text-mad-slate tracking-wider">
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4 border-t border-black/10">
+                        <div className="rounded-2xl bg-[#FAF7F0] p-4 border border-black/10">
+                          <p className="font-mono-data text-[10px] uppercase text-[#52525B] tracking-wider">
                             ESTIMATED TIMELINE
                           </p>
-                          <p className="font-mono-data text-xl sm:text-2xl font-bold text-mad-green mt-1">
+                          <p className="font-mono-data text-xl sm:text-2xl font-bold text-[#0A0A0A] mt-1">
                             {result.estimatedTimelineMonths}
                           </p>
                         </div>
 
-                        <div className="rounded-2xl bg-mad-cream p-4 border border-mad-green/10">
-                          <p className="font-mono-data text-[10px] uppercase text-mad-slate tracking-wider">
+                        <div className="rounded-2xl bg-[#FAF7F0] p-4 border border-black/10">
+                          <p className="font-mono-data text-[10px] uppercase text-[#52525B] tracking-wider">
                             REGULATORY FRICTION
                           </p>
                           <p
@@ -639,7 +627,7 @@ export const ReadinessCalculator: React.FC = () => {
                               result.regulatoryComplexity === "Low"
                                 ? "text-emerald-700"
                                 : result.regulatoryComplexity === "Medium"
-                                ? "text-mad-gold"
+                                ? "text-[#FF4D1C]"
                                 : "text-amber-700"
                             }`}
                           >
@@ -647,11 +635,11 @@ export const ReadinessCalculator: React.FC = () => {
                           </p>
                         </div>
 
-                        <div className="col-span-2 sm:col-span-1 rounded-2xl bg-mad-cream p-4 border border-mad-green/10">
-                          <p className="font-mono-data text-[10px] uppercase text-mad-slate tracking-wider">
+                        <div className="col-span-2 sm:col-span-1 rounded-2xl bg-[#FAF7F0] p-4 border border-black/10">
+                          <p className="font-mono-data text-[10px] uppercase text-[#52525B] tracking-wider">
                             SECTOR PROFILE
                           </p>
-                          <p className="font-display text-sm font-bold text-mad-green mt-1 truncate">
+                          <p className="font-body text-sm font-bold text-[#0A0A0A] mt-1 truncate">
                             {formData.industry}
                           </p>
                         </div>
@@ -667,14 +655,14 @@ export const ReadinessCalculator: React.FC = () => {
                 <div className="lg:col-span-7 space-y-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="font-display text-xl font-bold text-mad-green">
+                      <h3 className="font-display text-xl font-semibold text-[#0A0A0A]">
                         Scoring Factor Breakdown
                       </h3>
-                      <p className="font-body text-xs text-mad-slate mt-0.5">
+                      <p className="font-body text-xs text-[#52525B] mt-0.5">
                         Specific positive drivers and regulatory frictions impacting your score.
                       </p>
                     </div>
-                    <span className="font-mono-data text-xs text-mad-slate">
+                    <span className="font-mono-data text-xs text-[#52525B]">
                       {result.factors.length} Evaluated Factors
                     </span>
                   </div>
@@ -685,20 +673,20 @@ export const ReadinessCalculator: React.FC = () => {
                       return (
                         <div
                           key={idx}
-                          className="rounded-2xl border border-mad-green/10 bg-mad-cream-alt p-5 transition-all hover:border-mad-green/25 space-y-2"
+                          className="rounded-2xl border border-black/10 bg-white p-5 transition-all hover:border-black/25 space-y-2"
                         >
                           <div className="flex items-center justify-between gap-2">
                             <div className="flex items-center gap-2.5">
                               {isPositive ? (
-                                <div className="h-6 w-6 rounded-full bg-mad-green/10 text-mad-green flex items-center justify-center shrink-0">
+                                <div className="h-6 w-6 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0">
                                   <CheckCircle2 className="h-4 w-4" />
                                 </div>
                               ) : (
-                                <div className="h-6 w-6 rounded-full bg-mad-gold/15 text-mad-gold flex items-center justify-center shrink-0">
+                                <div className="h-6 w-6 rounded-full bg-[#FF4D1C]/10 text-[#FF4D1C] flex items-center justify-center shrink-0">
                                   <AlertTriangle className="h-4 w-4" />
                                 </div>
                               )}
-                              <h4 className="font-display text-sm font-bold text-mad-green">
+                              <h4 className="font-display text-sm font-semibold text-[#0A0A0A]">
                                 {factor.label}
                               </h4>
                             </div>
@@ -706,15 +694,15 @@ export const ReadinessCalculator: React.FC = () => {
                             <span
                               className={`font-mono-data text-xs font-semibold px-2.5 py-0.5 rounded-full ${
                                 isPositive
-                                  ? "bg-mad-green/10 text-mad-green border border-mad-green/20"
-                                  : "bg-mad-slate/10 text-mad-slate border border-mad-slate/20"
+                                  ? "bg-emerald-50 text-emerald-800 border border-emerald-200"
+                                  : "bg-[#FF4D1C]/10 text-[#FF4D1C] border border-[#FF4D1C]/20"
                               }`}
                             >
                               {factor.points >= 0 ? `+${factor.points} pts` : `${factor.points} pts`}
                             </span>
                           </div>
 
-                          <p className="font-body text-xs text-mad-slate leading-relaxed pl-8">
+                          <p className="font-body text-xs text-[#52525B] leading-relaxed pl-8">
                             {factor.description}
                           </p>
                         </div>
@@ -726,34 +714,34 @@ export const ReadinessCalculator: React.FC = () => {
                 {/* Column 2: Corridor Compliance Checklist (5 Cols) */}
                 <div className="lg:col-span-5 space-y-6">
                   <div>
-                    <h3 className="font-display text-xl font-bold text-mad-green">
+                    <h3 className="font-display text-xl font-semibold text-[#0A0A0A]">
                       Corridor Compliance Roadmap
                     </h3>
-                    <p className="font-body text-xs text-mad-slate mt-0.5">
+                    <p className="font-body text-xs text-[#52525B] mt-0.5">
                       Key documentation & filing milestones required for {result.corridorCode}.
                     </p>
                   </div>
 
-                  <div className="rounded-3xl border border-mad-green/15 bg-mad-cream-alt p-6 space-y-4">
+                  <div className="rounded-3xl border border-black/10 bg-white p-6 space-y-4 shadow-subtle">
                     {result.complianceChecklist.map((item, idx) => (
                       <div
                         key={item.id}
-                        className="p-4 rounded-2xl bg-mad-cream border border-mad-green/10 space-y-1.5"
+                        className="p-4 rounded-2xl bg-[#FAF7F0] border border-black/10 space-y-1.5"
                       >
                         <div className="flex items-center justify-between">
-                          <span className="font-display text-xs font-bold text-mad-green">
+                          <span className="font-display text-xs font-semibold text-[#0A0A0A]">
                             {idx + 1}. {item.title}
                           </span>
-                          <span className="font-mono-data text-[10px] text-mad-slate">
+                          <span className="font-mono-data text-[10px] text-[#52525B]">
                             ~{item.estimatedDays} Days
                           </span>
                         </div>
-                        <p className="font-body text-xs text-mad-slate leading-relaxed">
+                        <p className="font-body text-xs text-[#52525B] leading-relaxed">
                           {item.description}
                         </p>
                         {item.mandatory && (
                           <div className="pt-1">
-                            <span className="font-mono-data text-[9px] uppercase tracking-wider text-mad-green font-semibold">
+                            <span className="font-mono-data text-[9px] uppercase tracking-wider text-[#FF4D1C] font-semibold">
                               ● Mandatory Requirement
                             </span>
                           </div>
@@ -774,33 +762,33 @@ export const ReadinessCalculator: React.FC = () => {
               </div>
 
               {/* Flagship Tier 1 → Tier 3 Settlement Bridge Card */}
-              <div className="rounded-3xl border-2 border-mad-green bg-mad-green text-mad-cream p-8 sm:p-10 shadow-card">
+              <div className="rounded-3xl border border-black bg-[#0A0A0A] text-white p-8 sm:p-10 shadow-card">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                   <div className="lg:col-span-8 space-y-4">
                     <div className="flex items-center gap-2">
-                      <span className="font-mono-data text-xs text-mad-gold font-bold bg-mad-gold/15 border border-mad-gold/30 px-2.5 py-1 rounded-full">
+                      <span className="font-mono-data text-xs text-[#FF4D1C] font-semibold bg-[#FF4D1C]/15 border border-[#FF4D1C]/30 px-2.5 py-1 rounded-full">
                         TIER 1 → TIER 3 ARCHITECTURE BRIDGE
                       </span>
                     </div>
 
-                    <h3 className="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-mad-cream">
-                      Ready to move money in {formData.targetMarket}?
+                    <h3 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight text-white">
+                      Direct Local Currency Settlement in {formData.targetMarket}
                     </h3>
 
-                    <p className="font-body text-sm text-mad-cream/80 max-w-2xl leading-relaxed">
-                      Your readiness diagnostic is verified for the {result.corridorCode} trade corridor. Proceed to initialize your dedicated local currency collection accounts, multi-party escrow agreements, and automated INR settlement rails.
+                    <p className="font-body text-sm text-zinc-300 max-w-2xl leading-relaxed">
+                      Your readiness diagnostic is verified for the {result.corridorCode} trade corridor. Proceed to provision your dedicated local currency collection accounts, multi-party escrow agreements, and automated INR settlement rails.
                     </p>
                   </div>
 
                   <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3 justify-end">
                     <Link href={`/settlement-setup?target=${encodeURIComponent(formData.targetMarket)}`}>
-                      <Button variant="gold" size="lg" className="w-full justify-between group">
+                      <Button variant="orange" size="lg" className="w-full justify-between group">
                         <span>Configure Settlement Setup</span>
                         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                       </Button>
                     </Link>
                     <Link href="/compliance-navigator">
-                      <Button variant="ghost" size="md" className="w-full text-mad-cream/80 hover:text-mad-cream hover:bg-mad-cream/10 font-mono-data text-xs">
+                      <Button variant="ghost" size="md" className="w-full text-zinc-300 hover:text-white hover:bg-white/10 font-mono-data text-xs">
                         <span>Review Full Compliance Vault</span>
                       </Button>
                     </Link>
@@ -814,3 +802,4 @@ export const ReadinessCalculator: React.FC = () => {
     </div>
   );
 };
+

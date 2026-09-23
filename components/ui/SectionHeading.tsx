@@ -1,9 +1,9 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 
-export interface SectionHeadingProps extends React.HTMLAttributes<HTMLDivElement> {
-  title: string;
-  subtitle?: string;
+export interface SectionHeadingProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
+  title: React.ReactNode;
+  subtitle?: React.ReactNode;
   badge?: string;
   align?: "left" | "center" | "right";
   size?: "sm" | "md" | "lg" | "xl";
@@ -34,23 +34,24 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
   return (
     <div className={cn("flex flex-col max-w-3xl", alignments[align], className)} {...props}>
       {badge && (
-        <span className="inline-block px-3 py-1 mb-3 text-xs font-mono-data uppercase tracking-wider text-mad-gold font-bold bg-mad-green/10 border border-mad-green/20 rounded-full">
+        <span className="inline-block px-3 py-1 mb-3 text-xs font-mono-data uppercase tracking-wider text-[#0A0A0A] font-semibold bg-black/5 border border-black/10 rounded-full">
           {badge}
         </span>
       )}
       <h2
         className={cn(
-          "font-display font-bold text-mad-green tracking-tight leading-tight",
+          "font-display font-semibold text-[#0A0A0A] tracking-tight leading-[1.15]",
           titleSizes[size]
         )}
       >
         {title}
       </h2>
       {subtitle && (
-        <p className="mt-3 font-body text-base sm:text-lg text-mad-slate leading-relaxed">
+        <p className="mt-3 font-body text-sm sm:text-base text-[#52525B] leading-relaxed">
           {subtitle}
         </p>
       )}
     </div>
   );
 };
+

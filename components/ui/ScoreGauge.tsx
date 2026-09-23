@@ -102,15 +102,6 @@ export const ScoreGauge: React.FC<ScoreGaugeProps> = ({
     >
       {/* Gauge Instrument Housing */}
       <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
-
-        {/* Subtle background glow for instrument */}
-        <div
-          className="absolute inset-4 rounded-full opacity-60 pointer-events-none blur-xl"
-          style={{
-            background: "radial-gradient(circle, rgba(201, 162, 39, 0.12) 0%, rgba(14, 77, 59, 0.04) 60%, transparent 80%)",
-          }}
-        />
-
         <svg
           width={size}
           height={size}
@@ -120,13 +111,13 @@ export const ScoreGauge: React.FC<ScoreGaugeProps> = ({
           <defs>
             {/* Gold Arc Glow Filter */}
             <filter id="gaugeGoldGlow" x="-20%" y="-20%" width="140%" height="140%">
-              <feDropShadow dx="0" dy="0" stdDeviation="3.5" floodColor="#C9A227" floodOpacity="0.45" />
+              <feDropShadow dx="0" dy="0" stdDeviation="3" floodColor="#C9A227" floodOpacity="0.35" />
             </filter>
             {/* Inner Dial Gradient */}
             <radialGradient id="innerDialGrad" cx="50%" cy="50%" r="50%">
               <stop offset="0%" stopColor="#FAF7F0" stopOpacity="0.9" />
-              <stop offset="85%" stopColor="#F1ECDD" stopOpacity="0.8" />
-              <stop offset="100%" stopColor="#E5DEC9" stopOpacity="0.5" />
+              <stop offset="85%" stopColor="#F4F2EC" stopOpacity="0.8" />
+              <stop offset="100%" stopColor="#EAE5D8" stopOpacity="0.5" />
             </radialGradient>
           </defs>
 
@@ -136,19 +127,19 @@ export const ScoreGauge: React.FC<ScoreGaugeProps> = ({
             cy={center}
             r={radius - 8}
             fill="url(#innerDialGrad)"
-            stroke="#0E4D3B"
+            stroke="#0A0A0A"
             strokeOpacity="0.08"
             strokeWidth="1"
           />
 
-          {/* Navigational Crosshairs (Subtle Compass Grid) */}
+          {/* Navigational Crosshairs */}
           <line
             x1={center - radius + 12}
             y1={center}
             x2={center + radius - 12}
             y2={center}
-            stroke="#0E4D3B"
-            strokeOpacity="0.07"
+            stroke="#0A0A0A"
+            strokeOpacity="0.06"
             strokeDasharray="2 3"
           />
           <line
@@ -156,8 +147,8 @@ export const ScoreGauge: React.FC<ScoreGaugeProps> = ({
             y1={center - radius + 12}
             x2={center}
             y2={center + radius - 12}
-            stroke="#0E4D3B"
-            strokeOpacity="0.07"
+            stroke="#0A0A0A"
+            strokeOpacity="0.06"
             strokeDasharray="2 3"
           />
 
@@ -167,8 +158,8 @@ export const ScoreGauge: React.FC<ScoreGaugeProps> = ({
             cy={center}
             r={(radius - 8) * 0.6}
             fill="none"
-            stroke="#0E4D3B"
-            strokeOpacity="0.06"
+            stroke="#0A0A0A"
+            strokeOpacity="0.05"
             strokeDasharray="3 4"
           />
 
@@ -180,8 +171,8 @@ export const ScoreGauge: React.FC<ScoreGaugeProps> = ({
               y1={t.y1}
               x2={t.x2}
               y2={t.y2}
-              stroke={t.isFilled ? "#C9A227" : "#0E4D3B"}
-              strokeOpacity={t.isFilled ? (t.isMajor ? 0.9 : 0.6) : (t.isMajor ? 0.25 : 0.12)}
+              stroke={t.isFilled ? "#C9A227" : "#0A0A0A"}
+              strokeOpacity={t.isFilled ? (t.isMajor ? 0.95 : 0.7) : (t.isMajor ? 0.25 : 0.1)}
               strokeWidth={t.isMajor ? 1.75 : 1}
               strokeLinecap="round"
             />
@@ -193,8 +184,8 @@ export const ScoreGauge: React.FC<ScoreGaugeProps> = ({
             cy={center}
             r={radius}
             fill="none"
-            stroke="#0E4D3B"
-            strokeOpacity="0.1"
+            stroke="#0A0A0A"
+            strokeOpacity="0.08"
             strokeWidth={strokeWidth}
             strokeDasharray={`${arcLength} ${circumference}`}
             strokeDashoffset="0"
@@ -222,27 +213,27 @@ export const ScoreGauge: React.FC<ScoreGaugeProps> = ({
         {/* Center Display Readout */}
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none">
           {/* Micro Telemetry Label */}
-          <span className="font-mono-data text-[10px] tracking-widest uppercase text-mad-slate/80 font-medium">
+          <span className="font-mono-data text-[10px] tracking-widest uppercase text-brand-muted font-medium">
             INDEX SCORE
           </span>
 
           {/* Large Mono Score */}
           <div className="flex items-baseline justify-center -my-0.5">
-            <span className="font-mono-data text-5xl sm:text-6xl font-medium tracking-tighter text-mad-green">
+            <span className="font-mono-data text-5xl sm:text-6xl font-semibold tracking-tighter text-brand-dark">
               {displayScore}
             </span>
           </div>
 
           {/* Benchmark denominator */}
-          <div className="flex items-center gap-1.5 font-mono-data text-xs text-mad-slate">
+          <div className="flex items-center gap-1.5 font-mono-data text-xs text-brand-muted">
             <span>SCALE</span>
-            <span className="text-mad-green font-semibold">0-{maxScore}</span>
+            <span className="text-brand-dark font-semibold">0-{maxScore}</span>
           </div>
 
           {/* Status Chip */}
-          <div className="mt-2 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-mad-green/10 border border-mad-green/20">
-            <span className="h-1.5 w-1.5 rounded-full bg-mad-gold animate-pulse" />
-            <span className="font-mono-data text-[9px] uppercase tracking-wider font-semibold text-mad-green">
+          <div className="mt-2 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-black/5 border border-black/10">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#FF4D1C]" />
+            <span className="font-mono-data text-[9px] uppercase tracking-wider font-semibold text-brand-dark">
               CORRIDOR CLEARED
             </span>
           </div>
@@ -253,19 +244,19 @@ export const ScoreGauge: React.FC<ScoreGaugeProps> = ({
       {(label || sublabel || corridor) && (
         <div className="mt-4 text-center space-y-1">
           {label && (
-            <h4 className="font-display font-bold text-sm sm:text-base text-mad-green tracking-tight">
+            <h4 className="font-display font-bold text-sm sm:text-base text-brand-dark tracking-tight">
               {label}
             </h4>
           )}
           {sublabel && (
-            <p className="font-body text-xs text-mad-slate max-w-xs mx-auto">
+            <p className="font-body text-xs text-brand-muted max-w-xs mx-auto">
               {sublabel}
             </p>
           )}
           {corridor && (
             <div className="pt-1">
-              <span className="font-mono-data text-[11px] text-mad-slate/90 px-2.5 py-0.5 rounded-md bg-mad-cream-alt border border-mad-green/10">
-                ACTIVE CORRIDOR: <strong className="text-mad-green font-semibold">{corridor}</strong>
+              <span className="font-mono-data text-[11px] text-brand-muted px-2.5 py-0.5 rounded-md bg-white border border-black/10">
+                ACTIVE CORRIDOR: <strong className="text-brand-dark font-semibold">{corridor}</strong>
               </span>
             </div>
           )}

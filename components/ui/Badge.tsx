@@ -2,28 +2,31 @@ import React from "react";
 import { cn } from "@/lib/utils";
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
-  variant?: "green" | "gold" | "slate" | "outline" | "phase2" | "subtle";
+  variant?: "green" | "gold" | "slate" | "outline" | "phase2" | "subtle" | "orange" | "black" | "zinc";
   size?: "xs" | "sm" | "md";
   children: React.ReactNode;
 }
 
 export const Badge: React.FC<BadgeProps> = ({
   className,
-  variant = "green",
+  variant = "subtle",
   size = "sm",
   children,
   ...props
 }) => {
   const baseStyles =
-    "inline-flex items-center font-display rounded-full tracking-wide transition-colors";
+    "inline-flex items-center font-mono-data rounded-full tracking-wide transition-colors";
 
   const variants = {
-    subtle: "bg-mad-green/5 text-mad-green/90 border border-mad-green/15 font-medium",
-    green: "bg-mad-green/10 text-mad-green border border-mad-green/25 font-semibold",
-    gold: "bg-mad-gold/15 text-mad-ink border border-mad-gold/40 font-semibold",
-    slate: "bg-mad-slate/10 text-mad-slate border border-mad-slate/20 font-medium",
-    outline: "border border-mad-green/30 text-mad-green bg-transparent font-medium",
-    phase2: "bg-mad-gold/10 text-mad-ink/90 border border-dashed border-mad-gold/60 font-mono-data uppercase tracking-wider font-semibold",
+    subtle: "bg-[#0A0A0A]/5 text-[#0A0A0A] border border-[#0A0A0A]/10 font-medium",
+    green: "bg-[#0A0A0A] text-white border border-[#0A0A0A] font-semibold",
+    gold: "bg-[#FF4D1C]/10 text-[#0A0A0A] border border-[#FF4D1C]/30 font-semibold",
+    slate: "bg-black/5 text-[#52525B] border border-black/10 font-medium",
+    zinc: "bg-black/5 text-[#52525B] border border-black/10 font-medium",
+    outline: "border border-[#0A0A0A]/20 text-[#0A0A0A] bg-transparent font-medium",
+    phase2: "bg-[#FF4D1C]/10 text-[#0A0A0A] border border-dashed border-[#FF4D1C]/50 uppercase tracking-wider font-semibold",
+    orange: "bg-[#FF4D1C] text-white border border-[#FF4D1C] font-semibold",
+    black: "bg-[#0A0A0A] text-white border border-[#0A0A0A] font-semibold",
   };
 
   const sizes = {
@@ -38,3 +41,4 @@ export const Badge: React.FC<BadgeProps> = ({
     </span>
   );
 };
+
