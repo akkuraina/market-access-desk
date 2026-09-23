@@ -21,10 +21,6 @@ export default function ReadinessScorePage() {
               <span className="h-1.5 w-1.5 rounded-full bg-[#FF4D1C]" />
               DIAGNOSTIC ENGINE
             </Badge>
-            <span className="text-xs text-black/20 font-mono-data">·</span>
-            <span className="font-mono-data text-xs text-[#52525B] uppercase tracking-wider">
-              TIER 1 SPECIFICATION
-            </span>
           </div>
 
           <SectionHeading

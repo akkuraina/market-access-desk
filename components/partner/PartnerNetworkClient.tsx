@@ -85,8 +85,12 @@ const ROADMAP_PHASES = [
     status: "Scheduled",
     title: "Programmatic Escrow Milestone Integration",
     timeframe: "Q1 2027",
-    description:
-      "Connecting partner fulfillment milestones directly to TradePe's local currency settlement and automated e-BRC generation.",
+    description: (
+      <>
+        Connecting partner fulfillment milestones directly to <TradePeWordmark />
+        &apos;s local currency settlement and automated e-BRC generation.
+      </>
+    ),
   },
 ];
 
@@ -127,9 +131,6 @@ export const PartnerNetworkClient: React.FC = () => {
             <Badge variant="orange" size="sm">
               PHASE 2 ARCHITECTURE · PRIVATE PREVIEW
             </Badge>
-            <span className="font-mono-data text-xs text-brand-muted">
-              [TIER 4 SPECIFICATION]
-            </span>
           </div>
 
           {/* Vision Headline */}

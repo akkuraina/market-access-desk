@@ -30,10 +30,16 @@ export const Footer: React.FC = () => {
             </p>
             {/* Attribution element */}
             <div className="pt-2">
-              <div className="inline-flex items-center gap-1.5 rounded-full border border-black/15 bg-white px-3 py-1 text-xs shadow-subtle">
+              <a
+                href="https://tradepe-landing.vercel.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full border border-black/15 bg-white px-3 py-1 text-xs shadow-subtle hover:border-[#FF4D1C]/50 hover:bg-[#FAF7F0] transition-colors"
+                title="Visit TradePe - Direct-Clearing Trade Infrastructure"
+              >
                 <span className="font-body text-[#52525B]">A direct program by</span>
-                <TradePeWordmark />
-              </div>
+                <TradePeWordmark asLink={false} />
+              </a>
             </div>
           </div>
 
@@ -91,11 +97,6 @@ export const Footer: React.FC = () => {
           <p className="font-body text-xs text-[#52525B]">
             © {new Date().getFullYear()} Market Access Desk. All rights reserved.
           </p>
-          <div className="flex items-center gap-6 text-xs text-[#52525B] font-mono-data">
-            <span>DIRECT RAILS VERIFIED</span>
-            <span>·</span>
-            <span>MAD ENGINE v1.4</span>
-          </div>
         </div>
       </div>
     </footer>

@@ -21,10 +21,6 @@ export default function SettlementSetupPage() {
               <span className="h-1.5 w-1.5 rounded-full bg-[#FF4D1C]" />
               TREASURY & RAILS ARCHITECTURE
             </Badge>
-            <span className="text-xs text-brand-muted/40 font-mono-data">/</span>
-            <span className="font-mono-data text-xs text-brand-muted uppercase tracking-wider">
-              TIER 3 SPECIFICATION
-            </span>
           </div>
 
           <SectionHeading

@@ -76,10 +76,16 @@ export const Header: React.FC = () => {
 
         {/* Right Corner: Standardized "by TradePe" Attribution & Mobile Menu Toggle */}
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-1.5 rounded-full border border-black/15 bg-white px-3 py-1 text-xs shadow-subtle">
+          <a
+            href="https://tradepe-landing.vercel.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 rounded-full border border-black/15 bg-white px-3 py-1 text-xs shadow-subtle hover:border-[#FF4D1C]/50 hover:bg-[#FAF7F0] transition-colors"
+            title="Visit TradePe - Direct-Clearing Trade Infrastructure"
+          >
             <span className="font-body font-normal text-[#52525B]">by</span>
-            <TradePeWordmark />
-          </div>
+            <TradePeWordmark asLink={false} />
+          </a>
 
           {/* Mobile hamburger button */}
           <button

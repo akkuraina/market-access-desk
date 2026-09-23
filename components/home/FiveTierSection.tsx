@@ -190,11 +190,6 @@ export const FiveTierSection: React.FC = () => {
             size="xl"
             className="max-w-3xl"
           />
-
-          <div className="hidden lg:flex flex-col items-end text-right font-mono-data text-xs text-[#52525B] space-y-1">
-            <span className="text-[#0A0A0A] font-semibold">MAD_FRAMEWORK_SPEC_2026</span>
-            <span>END-TO-END DIRECT RUNTIME</span>
-          </div>
         </div>
 
         {/* Editorial Vertical Staggered Sequence */}

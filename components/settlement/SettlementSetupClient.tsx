@@ -418,7 +418,7 @@ export const SettlementSetupClient: React.FC = () => {
             </div>
 
             <h3 className="font-display text-3xl sm:text-4xl lg:text-5xl font-normal tracking-tight text-white">
-              Get started with <TradePeWordmark />
+              Get started with <TradePeWordmark href="https://tradepe-landing.vercel.app" variant="orange" />
             </h3>
 
             <p className="font-body text-sm sm:text-base text-white/80 max-w-2xl leading-relaxed">
@@ -428,14 +428,16 @@ export const SettlementSetupClient: React.FC = () => {
 
           <div className="lg:col-span-4 flex flex-col gap-3 justify-end">
             <a
-              href="https://tradepe.in"
+              href="https://tradepe-landing.vercel.app"
               target="_blank"
               rel="noopener noreferrer"
               className="w-full"
             >
               <Button variant="orange" size="xl" className="w-full justify-between group text-base sm:text-lg">
-                <span className="inline-flex items-center gap-1.5">Get Started with <TradePeWordmark /></span>
-                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                <span className="inline-flex items-center gap-1.5 text-white font-semibold">
+                  Get Started with <TradePeWordmark asLink={false} variant="white" />
+                </span>
+                <ArrowRight className="h-5 w-5 text-white transition-transform group-hover:translate-x-1" />
               </Button>
             </a>
             <Link href="/readiness-score" className="w-full">
