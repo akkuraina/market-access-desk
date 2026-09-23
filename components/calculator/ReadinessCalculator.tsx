@@ -243,13 +243,15 @@ export const ReadinessCalculator: React.FC = () => {
                         </p>
                       </div>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                      <div role="radiogroup" aria-label="Home Market" className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                         {HOME_MARKETS.map((m) => {
                           const isSelected = formData.homeMarket === m.value;
                           return (
                             <button
                               key={m.value}
                               type="button"
+                              role="radio"
+                              aria-checked={isSelected}
                               onClick={() => setFormData({ ...formData, homeMarket: m.value })}
                               className={`flex items-center justify-between p-4 rounded-2xl border text-left transition-all ${
                                 isSelected
@@ -298,13 +300,15 @@ export const ReadinessCalculator: React.FC = () => {
                         </p>
                       </div>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                      <div role="radiogroup" aria-label="Industry Sector" className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                         {INDUSTRIES.map((ind) => {
                           const isSelected = formData.industry === ind.value;
                           return (
                             <button
                               key={ind.value}
                               type="button"
+                              role="radio"
+                              aria-checked={isSelected}
                               onClick={() => setFormData({ ...formData, industry: ind.value })}
                               className={`flex flex-col justify-between p-4 rounded-2xl border text-left transition-all ${
                                 isSelected
@@ -350,13 +354,15 @@ export const ReadinessCalculator: React.FC = () => {
                         </p>
                       </div>
 
-                      <div className="grid grid-cols-1 gap-3 pt-2">
+                      <div role="radiogroup" aria-label="Target Expansion Market" className="grid grid-cols-1 gap-3 pt-2">
                         {TARGET_MARKETS.map((tm) => {
                           const isSelected = formData.targetMarket === tm.value;
                           return (
                             <button
                               key={tm.value}
                               type="button"
+                              role="radio"
+                              aria-checked={isSelected}
                               onClick={() => setFormData({ ...formData, targetMarket: tm.value })}
                               className={`flex items-center justify-between p-4 rounded-2xl border text-left transition-all ${
                                 isSelected
@@ -412,13 +418,15 @@ export const ReadinessCalculator: React.FC = () => {
                         </p>
                       </div>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                      <div role="radiogroup" aria-label="Annual Export Revenue" className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                         {REVENUE_BANDS.map((rev) => {
                           const isSelected = formData.exportRevenue === rev.value;
                           return (
                             <button
                               key={rev.value}
                               type="button"
+                              role="radio"
+                              aria-checked={isSelected}
                               onClick={() => setFormData({ ...formData, exportRevenue: rev.value })}
                               className={`flex flex-col justify-between p-5 rounded-2xl border text-left transition-all ${
                                 isSelected
@@ -470,13 +478,15 @@ export const ReadinessCalculator: React.FC = () => {
                         </p>
                       </div>
 
-                      <div className="space-y-3 pt-2">
+                      <div role="radiogroup" aria-label="Export Experience" className="space-y-3 pt-2">
                         {EXPERIENCE_OPTIONS.map((exp) => {
                           const isSelected = formData.exportExperience === exp.value;
                           return (
                             <button
                               key={exp.value}
                               type="button"
+                              role="radio"
+                              aria-checked={isSelected}
                               onClick={() => setFormData({ ...formData, exportExperience: exp.value })}
                               className={`flex items-start justify-between w-full p-4 sm:p-5 rounded-2xl border text-left transition-all ${
                                 isSelected
@@ -511,6 +521,7 @@ export const ReadinessCalculator: React.FC = () => {
                       </div>
                     </motion.div>
                   )}
+
                 </AnimatePresence>
 
                 {/* Form Action Controls */}

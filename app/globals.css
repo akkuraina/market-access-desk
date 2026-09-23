@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -9,15 +9,15 @@
   --font-ibm-plex-sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-ibm-plex-mono: "IBM Plex Mono", monospace;
 
-  --mad-green: #0e4d3b;
-  --mad-green-light: #1b6b52;
-  --mad-gold: #c9a227;
-  --mad-gold-light: #e0be4d;
-  --mad-cream: #faf7f0;
-  --mad-cream-alt: #f1ecdd;
-  --mad-ink: #0f1512;
-  --mad-slate: #5c6b64;
-  --tradepe-orange: #ff4d1c;
+  --mad-green: #0E4D3B;
+  --mad-green-light: #1B6B52;
+  --mad-gold: #C9A227;
+  --mad-gold-light: #E0BE4D;
+  --mad-cream: #FAF7F0;
+  --mad-cream-alt: #F1ECDD;
+  --mad-ink: #0F1512;
+  --mad-slate: #4A5952;
+  --tradepe-orange: #FF4D1C;
 }
 
 @layer base {
@@ -25,9 +25,14 @@
     box-sizing: border-box;
   }
 
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
   body {
-    background-color: #faf7f0;
-    color: #0f1512;
+    background-color: #FAF7F0;
+    color: #0F1512;
     font-family: var(--font-ibm-plex-sans);
     min-height: 100vh;
     display: flex;
@@ -38,11 +43,32 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-space-grotesk);
-    color: #0e4d3b;
+    color: #0E4D3B;
+  }
+
+  :focus-visible {
+    outline: 2px solid #0E4D3B;
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
 ::selection {
-  background-color: #0e4d3b;
-  color: #faf7f0;
+  background-color: #0E4D3B;
+  color: #FAF7F0;
 }
+

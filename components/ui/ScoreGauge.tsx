@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { motion, useAnimation } from "framer-motion";
+import { motion, useAnimation, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export interface ScoreGaugeProps {
@@ -27,7 +27,8 @@ export const ScoreGauge: React.FC<ScoreGaugeProps> = ({
   className,
   animateOnView = true,
 }) => {
-  const [displayScore, setDisplayScore] = useState(0);
+  const shouldReduceMotion = useReducedMotion();
+  const [displayScore, setDisplayScore] = useState(shouldReduceMotion ? score : 0);
   const controls = useAnimation();
 
   const center = size / 2;
@@ -63,6 +64,12 @@ export const ScoreGauge: React.FC<ScoreGaugeProps> = ({
   });
 
   useEffect(() => {
+    if (shouldReduceMotion) {
+      setDisplayScore(normalizedScore);
+      controls.set({ strokeDashoffset: targetOffset });
+      return;
+    }
+
     let startTimestamp: number | null = null;
     const duration = 1400; // ms
 
@@ -85,12 +92,17 @@ export const ScoreGauge: React.FC<ScoreGaugeProps> = ({
     });
 
     return () => window.cancelAnimationFrame(animFrame);
-  }, [normalizedScore, targetOffset, controls]);
+  }, [normalizedScore, targetOffset, controls, shouldReduceMotion]);
 
   return (
-    <div className={cn("relative flex flex-col items-center select-none", className)}>
+    <div
+      role="img"
+      aria-label={`Market Readiness Gauge score ${normalizedScore} out of ${maxScore} for corridor ${corridor}`}
+      className={cn("relative flex flex-col items-center select-none", className)}
+    >
       {/* Gauge Instrument Housing */}
       <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
+
         {/* Subtle background glow for instrument */}
         <div
           className="absolute inset-4 rounded-full opacity-60 pointer-events-none blur-xl"
