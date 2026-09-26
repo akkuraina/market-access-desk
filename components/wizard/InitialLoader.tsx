@@ -9,237 +9,203 @@ interface InitialLoaderProps {
   duration?: number;
 }
 
+// Each letter's scattered starting position/rotation before assembly
+const LETTER_CONFIGS = [
+  // M — comes from upper-left
+  { x: -220, y: -120, rotate: -18, delay: 0 },
+  // A — comes from below center
+  { x: 20, y: 200, rotate: 12, delay: 0.08 },
+  // D — comes from upper-right
+  { x: 200, y: -100, rotate: 20, delay: 0.04 },
+];
+
+const LETTERS = ["M", "A", "D"];
+
+// Spring for the letter assembly — weighted, with overshoot
+const LETTER_SPRING = {
+  type: "spring" as const,
+  stiffness: 160,
+  damping: 18,
+  mass: 1.1,
+};
+
+// Route-line SVG path: a stylised trade-corridor arc sweeping left to right
+const ROUTE_PATH = "M 10,14 C 55,2 115,26 160,14 C 195,5 215,18 240,14";
+const ROUTE_PATH_LENGTH = 240;
+
 export const InitialLoader: React.FC<InitialLoaderProps> = ({
   onComplete,
-  duration = 1450,
+  duration = 3200,
 }) => {
   const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
-    if (shouldReduceMotion) {
-      const timer = setTimeout(onComplete, 400);
-      return () => clearTimeout(timer);
-    }
-    const timer = setTimeout(onComplete, duration);
+    const exitDuration = shouldReduceMotion ? 400 : duration;
+    const timer = setTimeout(onComplete, exitDuration);
     return () => clearTimeout(timer);
   }, [onComplete, duration, shouldReduceMotion]);
 
-  // Geometry for the instrument arc
-  const size = 200;
-  const strokeWidth = 4.5;
-  const center = size / 2;
-  const radius = center - strokeWidth - 14;
-  const circumference = 2 * Math.PI * radius;
-  const sweepAngle = 270;
-  const arcLength = (sweepAngle / 360) * circumference;
+  // Reduced-motion: single static fade-in of the composed state
+  if (shouldReduceMotion) {
+    return (
+      <motion.div
+        key="initial-loader"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.3 }}
+        className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#FAF7F0] px-6 text-center select-none overflow-hidden"
+        role="status"
+        aria-label="Market Access Desk Loading"
+      >
+        <div className="flex flex-col items-center gap-5">
+          <div
+            className="font-display font-black leading-none tracking-[-0.04em] text-[#0A0A0A]"
+            style={{ fontSize: "clamp(96px, 18vw, 144px)" }}
+          >
+            MA<span style={{ color: "#FF4D1C" }}>D</span>
+          </div>
+          <div className="w-48 h-[2px] bg-[#FF4D1C] rounded-full" />
+          <h1 className="font-display font-bold text-4xl sm:text-5xl text-[#0A0A0A] tracking-tight leading-[1.08]">
+            Market Access Desk
+          </h1>
+          <div className="mt-1 flex items-center justify-center gap-1.5">
+            <span className="font-display text-sm sm:text-base text-[#706E6B] font-light tracking-wide">
+              A
+            </span>
+            <TradePeWordmark asLink={false} className="text-sm sm:text-base" />
+            <span className="font-display text-sm sm:text-base text-[#706E6B] font-light tracking-wide">
+              initiative
+            </span>
+          </div>
+        </div>
+      </motion.div>
+    );
+  }
 
+  // Full kinetic animation
   return (
     <motion.div
       key="initial-loader"
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
       className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#FAF7F0] px-6 text-center select-none overflow-hidden"
       role="status"
       aria-label="Market Access Desk Loading"
     >
-      <div className="relative flex flex-col items-center max-w-xl mx-auto -translate-y-2">
-        {/* Layer 1: Radial Speed Trails / Motion Shockwave Rings during zoom */}
-        {!shouldReduceMotion && (
-          <>
-            {/* Rapid Fading Trail Echo 1 */}
-            <motion.div
-              aria-hidden="true"
-              initial={{ scale: 0.12, opacity: 0.55 }}
-              animate={{ scale: 1.35, opacity: 0 }}
-              transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute pointer-events-none rounded-full border border-[#FF4D1C]/40"
-              style={{
-                width: size,
-                height: size,
-                top: 0,
-                left: 0,
-                right: 0,
-                margin: "0 auto",
-              }}
-            />
+      <div className="flex flex-col items-center" style={{ gap: 0 }}>
 
-            {/* Rapid Fading Trail Echo 2 */}
-            <motion.div
-              aria-hidden="true"
-              initial={{ scale: 0.18, opacity: 0.4 }}
-              animate={{ scale: 1.6, opacity: 0 }}
-              transition={{ duration: 0.95, ease: [0.16, 1, 0.3, 1], delay: 0.04 }}
-              className="absolute pointer-events-none rounded-full border border-[#FF4D1C]/25"
-              style={{
-                width: size,
-                height: size,
-                top: 0,
-                left: 0,
-                right: 0,
-                margin: "0 auto",
-              }}
-            />
-
-            {/* Subtle Amber Warp Burst */}
-            <motion.div
-              aria-hidden="true"
-              initial={{ scale: 0.1, opacity: 0.35, filter: "blur(8px)" }}
-              animate={{ scale: [0.1, 1.2, 1.4], opacity: [0.35, 0.15, 0] }}
-              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute pointer-events-none rounded-full bg-[#FF4D1C]/20"
-              style={{
-                width: size * 0.85,
-                height: size * 0.85,
-                top: size * 0.075,
-                left: 0,
-                right: 0,
-                margin: "0 auto",
-              }}
-            />
-          </>
-        )}
-
-        {/* Layer 2: Main Zoom/Expand Arc Motif */}
-        <motion.div
-          initial={
-            shouldReduceMotion
-              ? { opacity: 0 }
-              : { scale: 0.14, opacity: 0, rotate: -25 }
-          }
-          animate={
-            shouldReduceMotion
-              ? { opacity: 1 }
-              : {
-                  scale: [0.14, 1.05, 1],
-                  opacity: [0, 1, 1],
-                  rotate: [-25, 0, 0],
-                }
-          }
-          transition={{
-            duration: shouldReduceMotion ? 0.3 : 0.9,
-            times: shouldReduceMotion ? undefined : [0, 0.78, 1],
-            ease: [0.16, 1, 0.3, 1],
-          }}
-          className="relative flex items-center justify-center mb-5 sm:mb-6"
-          style={{ width: size, height: size }}
+        {/* Phase 1 + 2: Scattered letters assemble into "MAD" */}
+        <div
+          className="flex items-end justify-center leading-none"
+          aria-label="MAD"
+          style={{ overflow: "visible", marginBottom: "4px" }}
         >
-          <svg
-            width={size}
-            height={size}
-            viewBox={`0 0 ${size} ${size}`}
-            className="overflow-visible"
-            aria-hidden="true"
-          >
-            <defs>
-              <filter id="loaderOrangeGlow" x="-30%" y="-30%" width="160%" height="160%">
-                <feDropShadow dx="0" dy="1" stdDeviation="5" floodColor="#FF4D1C" floodOpacity="0.3" />
-              </filter>
-            </defs>
+          {LETTERS.map((letter, i) => {
+            const cfg = LETTER_CONFIGS[i];
+            return (
+              <motion.span
+                key={letter}
+                aria-hidden="true"
+                className="font-display font-black leading-none tracking-[-0.03em] inline-block"
+                style={{
+                  fontSize: "clamp(88px, 16vw, 136px)",
+                  color: letter === "D" ? "#FF4D1C" : "#0A0A0A",
+                }}
+                initial={{ x: cfg.x, y: cfg.y, rotate: cfg.rotate, opacity: 0 }}
+                animate={{ x: 0, y: 0, rotate: 0, opacity: 1 }}
+                transition={{
+                  ...LETTER_SPRING,
+                  delay: 0.1 + cfg.delay,
+                  opacity: {
+                    duration: 0.25,
+                    delay: 0.1 + cfg.delay,
+                    ease: "easeOut",
+                  },
+                }}
+              >
+                {letter}
+              </motion.span>
+            );
+          })}
+        </div>
 
-            {/* Inner Concentric Calibration Guide Ring */}
-            <circle
-              cx={center}
-              cy={center}
-              r={radius - 12}
-              fill="none"
-              stroke="#0A0A0A"
-              strokeOpacity="0.05"
-              strokeWidth="1"
-              strokeDasharray="3 4"
-            />
+        {/* Phase 3: Route-line SVG draws beneath the letters */}
+        <motion.svg
+          aria-hidden="true"
+          viewBox="0 0 250 28"
+          width="250"
+          height="28"
+          style={{ overflow: "visible", display: "block", marginBottom: "24px" }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.2, delay: 0.55 }}
+        >
+          {/* Faint full-path track */}
+          <path
+            d={ROUTE_PATH}
+            fill="none"
+            stroke="#0A0A0A"
+            strokeOpacity="0.08"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
 
-            {/* Precision Crosshair Ticks */}
-            <line
-              x1={center - radius + 5}
-              y1={center}
-              x2={center - radius + 13}
-              y2={center}
-              stroke="#0A0A0A"
-              strokeOpacity="0.1"
-              strokeWidth="1"
-            />
-            <line
-              x1={center + radius - 13}
-              y1={center}
-              x2={center + radius - 5}
-              y2={center}
-              stroke="#0A0A0A"
-              strokeOpacity="0.1"
-              strokeWidth="1"
-            />
-            <line
-              x1={center}
-              y1={center - radius + 5}
-              x2={center}
-              y2={center - radius + 13}
-              stroke="#0A0A0A"
-              strokeOpacity="0.1"
-              strokeWidth="1"
-            />
+          {/* Animated orange draw-on line */}
+          <motion.path
+            d={ROUTE_PATH}
+            fill="none"
+            stroke="#FF4D1C"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeDasharray={ROUTE_PATH_LENGTH}
+            initial={{ strokeDashoffset: ROUTE_PATH_LENGTH }}
+            animate={{ strokeDashoffset: 0 }}
+            transition={{ duration: 0.7, delay: 0.6, ease: [0.4, 0, 0.2, 1] }}
+          />
 
-            {/* Outer Background Track Arc */}
-            <circle
-              cx={center}
-              cy={center}
-              r={radius}
-              fill="none"
-              stroke="#0A0A0A"
-              strokeOpacity="0.07"
-              strokeWidth={strokeWidth}
-              strokeDasharray={`${arcLength} ${circumference}`}
-              strokeLinecap="round"
-              transform={`rotate(135 ${center} ${center})`}
-            />
+          {/* Origin dot */}
+          <motion.circle
+            cx="10"
+            cy="14"
+            r="2.5"
+            fill="#0A0A0A"
+            fillOpacity={0.25}
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ type: "spring", stiffness: 300, damping: 15, delay: 0.55 }}
+            style={{ transformOrigin: "10px 14px" }}
+          />
 
-            {/* Dynamic Primary Orange Arc */}
-            <circle
-              cx={center}
-              cy={center}
-              r={radius}
-              fill="none"
-              stroke="#FF4D1C"
-              strokeWidth={strokeWidth}
-              strokeDasharray={`${arcLength} ${circumference}`}
-              strokeLinecap="round"
-              transform={`rotate(135 ${center} ${center})`}
-              filter="url(#loaderOrangeGlow)"
-            />
+          {/* Destination dot */}
+          <motion.circle
+            cx="240"
+            cy="14"
+            r="3.5"
+            fill="#FF4D1C"
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ type: "spring", stiffness: 300, damping: 15, delay: 1.25 }}
+            style={{ transformOrigin: "240px 14px" }}
+          />
+        </motion.svg>
 
-            {/* Central Focal Indicator */}
-            <circle
-              cx={center}
-              cy={center}
-              r={3}
-              fill="#0A0A0A"
-              fillOpacity="0.25"
-            />
-          </svg>
-        </motion.div>
-
-        {/* Layer 3: Staggered Headline Reveal */}
+        {/* Phase 4: Full headline settles in */}
         <motion.h1
-          initial={{ opacity: 0, y: 14 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: shouldReduceMotion ? 0.2 : 0.5,
-            delay: shouldReduceMotion ? 0.1 : 0.65,
-            ease: [0.16, 1, 0.3, 1],
-          }}
-          className="font-display font-bold text-4xl sm:text-5xl md:text-6xl text-[#0A0A0A] tracking-tight leading-[1.08]"
+          transition={{ duration: 0.55, delay: 1.0, ease: [0.16, 1, 0.3, 1] }}
+          className="font-display font-bold text-4xl sm:text-5xl md:text-[52px] text-[#0A0A0A] tracking-tight leading-[1.08]"
         >
           Market Access Desk
         </motion.h1>
 
-        {/* Layer 4: Staggered Signature Attribution */}
+        {/* Phase 5: Attribution line */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: shouldReduceMotion ? 0.2 : 0.45,
-            delay: shouldReduceMotion ? 0.15 : 0.8,
-            ease: [0.16, 1, 0.3, 1],
-          }}
+          transition={{ duration: 0.45, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
           className="mt-3 flex items-center justify-center gap-1.5"
         >
           <span className="font-display text-sm sm:text-base text-[#706E6B] font-light tracking-wide">
