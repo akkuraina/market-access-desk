@@ -9,14 +9,17 @@ interface StepTier1ReadinessProps {
   result: ReadinessResult;
   onNext: () => void;
   onReturnToHub?: () => void;
+  userName?: string;
 }
 
 export const StepTier1Readiness: React.FC<StepTier1ReadinessProps> = ({
   result,
   onNext,
   onReturnToHub,
+  userName,
 }) => {
   const topFactors = result.factors.slice(0, 3);
+  const displayName = userName ? userName.trim().split(" ")[0] : null;
 
   const getComplexityBadge = (complexity: string) => {
     switch (complexity) {
@@ -44,7 +47,7 @@ export const StepTier1Readiness: React.FC<StepTier1ReadinessProps> = ({
     <div className="w-full max-w-3xl mx-auto flex flex-col items-center justify-center text-center px-4 py-8 sm:py-12">
       {/* Elevated Headline & Subtitle */}
       <h1 className="font-display font-bold text-4xl sm:text-5xl text-[#0A0A0A] tracking-tight leading-[1.1] mb-2">
-        Tier 1: Market Readiness Score
+        {displayName ? `Nice work, ${displayName} — here's your score` : "Tier 1: Market Readiness Score"}
       </h1>
       <p className="font-body text-base sm:text-lg text-[#706E6B] font-light mb-6">
         Operational corridor clearance index for {result.corridorCode}

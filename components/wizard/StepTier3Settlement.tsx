@@ -9,6 +9,7 @@ interface StepTier3SettlementProps {
   onNext: () => void;
   onReturnToHub?: () => void;
   isExistingCustomer?: boolean | null;
+  userName?: string;
 }
 
 const SETTLEMENT_DETAILS: Record<
@@ -69,8 +70,10 @@ export const StepTier3Settlement: React.FC<StepTier3SettlementProps> = ({
   onNext,
   onReturnToHub,
   isExistingCustomer,
+  userName,
 }) => {
   const details = SETTLEMENT_DETAILS[targetMarket] || SETTLEMENT_DETAILS["United Kingdom"];
+  const displayName = userName ? userName.trim().split(" ")[0] : null;
 
   return (
     <div className="w-full max-w-3xl mx-auto flex flex-col items-center justify-center text-center px-4 py-8 sm:py-12">
@@ -79,7 +82,9 @@ export const StepTier3Settlement: React.FC<StepTier3SettlementProps> = ({
         Tier 3: Settlement Setup
       </h1>
       <p className="font-display font-semibold text-xl sm:text-2xl text-[#0A0A0A] mb-2">
-        Your {targetMarket} settlement account is ready to configure.
+        {displayName
+          ? `Ready to configure, ${displayName} — your ${targetMarket} account`
+          : `Your ${targetMarket} settlement account is ready to configure.`}
       </p>
       <p className="font-body text-base sm:text-lg text-[#706E6B] font-light mb-10 max-w-xl">
         Direct domestic clearing eliminates correspondent intermediary banking fees and foreign exchange margin drag.

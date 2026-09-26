@@ -19,66 +19,105 @@ export const StepProgressIndicator: React.FC<StepProgressIndicatorProps> = ({
     return null;
   }
 
-  let progress = 0.16;
+  let progress = 0.15;
   let totalSteps = 6;
 
   if (isExistingCustomer === true) {
-    totalSteps = 3;
+    totalSteps = 4;
     switch (currentStep) {
       case "signin":
-        progress = 1 / 3;
+        progress = 0.25;
         break;
       case "hub":
-        progress = 2 / 3;
+        progress = 0.5;
         break;
       case "trade-insights":
       case "standalone-compliance":
       case "partner-network":
-        progress = 3 / 3;
+        progress = 0.85;
+        break;
+      case "transition-hub-return":
+        progress = 0.65;
         break;
       case "inputs":
-        progress = 2 / 4;
+        progress = 0.6;
+        break;
+      case "transition-to-tier1":
+        progress = 0.65;
         break;
       case "tier1-readiness":
-        progress = 3 / 5;
+        progress = 0.75;
+        break;
+      case "transition-to-tier2":
+        progress = 0.8;
         break;
       case "tier2-compliance":
-        progress = 4 / 5;
+        progress = 0.85;
+        break;
+      case "transition-to-tier3":
+        progress = 0.9;
         break;
       case "tier3-settlement":
+      case "transition-to-tier45":
       case "tier45-preview":
-        progress = 5 / 5;
+        progress = 0.95;
+        break;
+      case "transition-to-profile":
+      case "profile-snapshot":
+        progress = 1.0;
         break;
       default:
-        progress = 1 / 3;
+        progress = 0.5;
     }
   } else {
     totalSteps = 6;
     switch (currentStep) {
       case "entry":
-        progress = 1 / 6;
+        progress = 0.1;
+        break;
+      case "new-intro":
+        progress = 0.18;
+        break;
+      case "new-info":
+        progress = 0.28;
         break;
       case "inputs":
-        progress = 2 / 6;
+        progress = 0.38;
+        break;
+      case "transition-to-tier1":
+        progress = 0.45;
         break;
       case "tier1-readiness":
-        progress = 3 / 6;
+        progress = 0.55;
+        break;
+      case "transition-to-tier2":
+        progress = 0.65;
         break;
       case "tier2-compliance":
-        progress = 4 / 6;
+        progress = 0.75;
+        break;
+      case "transition-to-tier3":
+        progress = 0.82;
         break;
       case "tier3-settlement":
-        progress = 5 / 6;
+        progress = 0.88;
+        break;
+      case "transition-to-tier45":
+        progress = 0.92;
         break;
       case "tier45-preview":
-        progress = 6 / 6;
+        progress = 0.96;
+        break;
+      case "transition-to-profile":
+      case "profile-snapshot":
+        progress = 1.0;
         break;
       default:
-        progress = 1 / 6;
+        progress = 0.15;
     }
   }
 
-  const percentage = Math.min(Math.max(progress * 100, 10), 100);
+  const percentage = Math.min(Math.max(progress * 100, 8), 100);
 
   return (
     <div

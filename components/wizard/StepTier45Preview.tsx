@@ -6,12 +6,14 @@ import { Network, BarChart3, RotateCcw, Sparkles, ArrowLeft } from "lucide-react
 interface StepTier45PreviewProps {
   onRestart: () => void;
   onReturnToHub?: () => void;
+  onFinish?: () => void;
   isExistingCustomer?: boolean | null;
 }
 
 export const StepTier45Preview: React.FC<StepTier45PreviewProps> = ({
   onRestart,
   onReturnToHub,
+  onFinish,
   isExistingCustomer,
 }) => {
   return (
@@ -92,14 +94,25 @@ export const StepTier45Preview: React.FC<StepTier45PreviewProps> = ({
           </button>
         </div>
       ) : (
-        <button
-          type="button"
-          onClick={onRestart}
-          className="w-full group flex items-center justify-center gap-2 py-4 px-6 rounded-xl bg-[#0A0A0A] text-white font-display font-semibold text-lg border-2 border-[#0A0A0A] hover:border-[#FF4D1C] shadow-sm hover:shadow-card transition-all duration-200 hover:-translate-y-0.5"
-        >
-          <RotateCcw className="h-5 w-5 text-white/70 group-hover:text-white group-hover:-rotate-90 transition-transform duration-300" />
-          <span>Restart Demo</span>
-        </button>
+        <div className="w-full flex flex-col items-center gap-4">
+          <button
+            type="button"
+            onClick={onFinish || onRestart}
+            className="w-full sm:w-auto min-w-[280px] group flex items-center justify-center gap-2 py-4 px-8 rounded-xl bg-[#0A0A0A] text-white font-display font-semibold text-lg border-2 border-[#0A0A0A] hover:border-[#FF4D1C] shadow-sm hover:shadow-card transition-all duration-200 hover:-translate-y-0.5"
+          >
+            <span>Finish — View Profile Snapshot</span>
+            <Sparkles className="h-5 w-5 text-[#FF4D1C]" />
+          </button>
+
+          <button
+            type="button"
+            onClick={onRestart}
+            className="inline-flex items-center gap-1.5 font-mono-data text-xs text-[#706E6B] hover:text-[#0A0A0A] transition-colors underline underline-offset-4"
+          >
+            <RotateCcw className="h-3.5 w-3.5" />
+            <span>Restart demo</span>
+          </button>
+        </div>
       )}
     </div>
   );

@@ -8,20 +8,23 @@ interface StepTier2ComplianceProps {
   result: ReadinessResult;
   onNext: () => void;
   onReturnToHub?: () => void;
+  userName?: string;
 }
 
 export const StepTier2Compliance: React.FC<StepTier2ComplianceProps> = ({
   result,
   onNext,
   onReturnToHub,
+  userName,
 }) => {
   const checklist = result.complianceChecklist.slice(0, 4);
+  const displayName = userName ? userName.trim().split(" ")[0] : null;
 
   return (
     <div className="w-full max-w-3xl mx-auto flex flex-col items-center justify-center text-center px-4 py-8 sm:py-12">
       {/* Title */}
       <h1 className="font-display font-bold text-4xl sm:text-5xl text-[#0A0A0A] tracking-tight leading-[1.1] mb-2">
-        Tier 2: Compliance Checklist
+        {displayName ? `${displayName}'s Compliance Roadmap` : "Tier 2: Compliance Checklist"}
       </h1>
       <p className="font-body text-base sm:text-lg text-[#706E6B] font-light mb-8">
         Mandatory regulatory filings and prerequisites for {result.corridorCode}

@@ -13,12 +13,14 @@ export type ExistingHubOption =
 interface StepExistingHubProps {
   userName: string;
   onSelectOption: (option: ExistingHubOption) => void;
+  onFinishProfile: () => void;
   onRestart: () => void;
 }
 
 export const StepExistingHub: React.FC<StepExistingHubProps> = ({
   userName,
   onSelectOption,
+  onFinishProfile,
   onRestart,
 }) => {
   const firstName = userName.trim().split(" ")[0] || "there";
@@ -142,8 +144,17 @@ export const StepExistingHub: React.FC<StepExistingHubProps> = ({
         })}
       </motion.div>
 
-      {/* Quiet Secondary Exit Affordance */}
-      <div className="pt-2">
+      {/* Primary Finish & Quiet Secondary Exit Affordances */}
+      <div className="w-full flex flex-col items-center gap-4 pt-2">
+        <button
+          type="button"
+          onClick={onFinishProfile}
+          className="w-full sm:w-auto min-w-[280px] group flex items-center justify-center gap-2 py-4 px-8 rounded-xl bg-[#0A0A0A] text-white font-display font-semibold text-lg border-2 border-[#0A0A0A] hover:border-[#FF4D1C] shadow-sm hover:shadow-card transition-all duration-200 hover:-translate-y-0.5"
+        >
+          <span>Finish — View My Profile</span>
+          <ArrowRight className="h-5 w-5 text-white/70 group-hover:text-white group-hover:translate-x-1 transition-all" />
+        </button>
+
         <button
           type="button"
           onClick={onRestart}
