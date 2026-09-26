@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { ArrowRight, Sparkles, Building2, User, Mail } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import { Eye, EyeOff, ArrowRight } from "lucide-react";
 
 interface StepNewCustomerInfoProps {
-  onContinue: (userData: { name: string; company: string; email: string }) => void;
+  onContinue: (userData: { name: string; email: string }) => void;
   onBack?: () => void;
 }
 
@@ -12,13 +13,15 @@ export const StepNewCustomerInfo: React.FC<StepNewCustomerInfoProps> = ({
   onContinue,
   onBack,
 }) => {
+  const shouldReduceMotion = useReducedMotion();
   const [name, setName] = useState("");
-  const [company, setCompany] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState<{
     name?: string;
-    company?: string;
     email?: string;
+    password?: string;
   }>({});
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -32,11 +35,6 @@ export const StepNewCustomerInfo: React.FC<StepNewCustomerInfoProps> = ({
       newErrors.name = "Please enter your full name.";
     }
 
-    const cleanCompany = company.trim();
-    if (!cleanCompany) {
-      newErrors.company = "Please enter your enterprise or company name.";
-    }
-
     const cleanEmail = email.trim();
     if (!cleanEmail) {
       newErrors.email = "Please enter your business email.";
@@ -44,154 +42,172 @@ export const StepNewCustomerInfo: React.FC<StepNewCustomerInfoProps> = ({
       newErrors.email = "Please enter a valid email address.";
     }
 
+    if (!password) {
+      newErrors.password = "Please enter your password.";
+    }
+
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
 
+    // Note: State is maintained strictly in component/wizard memory for the active session.
+    // No values are transmitted over network or saved to localStorage/sessionStorage.
     onContinue({
       name: cleanName,
-      company: cleanCompany,
       email: cleanEmail,
     });
   };
 
   return (
-    <div className="w-full max-w-xl mx-auto flex flex-col items-center justify-center px-4 py-8 sm:py-12">
-      {/* Editorial Headline & Hierarchy */}
-      <div className="w-full text-left mb-8 sm:mb-10">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/5 border border-black/10 mb-4">
-          <Sparkles className="h-3.5 w-3.5 text-[#FF4D1C]" />
-          <span className="font-mono-data text-[11px] uppercase tracking-wider font-semibold text-[#0A0A0A]">
-            TradePe Account Setup
-          </span>
+    <div className="w-full max-w-lg mx-auto px-4 py-8 sm:py-12">
+      {/* Centered Elevated Premium Panel */}
+      <motion.div
+        initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 16, scale: 0.98 }}
+        animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+        className="w-full bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-10 border border-black/[0.08] shadow-[0_4px_24px_-4px_rgba(0,0,0,0.06),0_1px_2px_rgba(0,0,0,0.04)]"
+      >
+        {/* Headline & Subtext */}
+        <div className="mb-6 sm:mb-8 text-left">
+          <h1 className="font-display font-bold text-3xl sm:text-4xl text-[#0A0A0A] tracking-tight mb-2">
+            Let&apos;s get you set up.
+          </h1>
+          <p className="font-body text-sm sm:text-base text-[#706E6B] font-light">
+            A few details to personalize your experience
+          </p>
         </div>
-        <h1 className="font-display font-bold text-4xl sm:text-5xl text-[#0A0A0A] tracking-tight leading-[1.1] mb-3">
-          Hi, a few details to get started.
-        </h1>
-        <p className="font-body text-base sm:text-lg text-[#706E6B] font-light leading-relaxed">
-          Let&apos;s personalize your global direct-clearing readiness journey.
-        </p>
-      </div>
 
-      {/* Form */}
-      <form onSubmit={handleSubmit} className="w-full space-y-5" noValidate>
-        {/* Full Name */}
-        <div>
-          <label
-            htmlFor="new-user-name"
-            className="block font-mono-data text-xs uppercase tracking-wider font-semibold text-[#0A0A0A] mb-1.5"
-          >
-            Your Full Name
-          </label>
-          <div className="relative">
+        {/* 3-Field Form: Full Name, Email, Password */}
+        <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+          {/* 1. Full Name */}
+          <div>
+            <label
+              htmlFor="new-user-name"
+              className="block font-mono-data text-xs uppercase tracking-wider font-semibold text-[#0A0A0A]/90 mb-1.5 text-left"
+            >
+              Full Name
+            </label>
             <input
               id="new-user-name"
               type="text"
+              autoComplete="name"
               value={name}
               onChange={(e) => {
                 setName(e.target.value);
                 if (errors.name) setErrors((prev) => ({ ...prev, name: undefined }));
               }}
               placeholder="e.g. Ananya Singhania"
-              className={`w-full px-4 py-3.5 pl-11 rounded-xl bg-white border-2 text-[#0A0A0A] placeholder:text-[#706E6B]/50 font-body text-base transition-all focus:outline-none ${
+              className={`w-full px-4 py-3.5 rounded-xl bg-[#FAF7F0]/50 border text-[#0A0A0A] placeholder:text-[#706E6B]/40 font-body text-base transition-all duration-200 focus:outline-none focus:bg-white focus:border-[#FF4D1C] focus:ring-2 focus:ring-[#FF4D1C]/20 ${
                 errors.name
-                  ? "border-red-500 focus:border-red-500"
-                  : "border-black/10 focus:border-[#0A0A0A]"
+                  ? "border-red-500 focus:border-red-500 focus:ring-red-500/20"
+                  : "border-black/15"
               }`}
             />
-            <User className="h-5 w-5 text-[#706E6B] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+            {errors.name && (
+              <p className="mt-1.5 text-xs text-red-600 font-mono-data text-left">{errors.name}</p>
+            )}
           </div>
-          {errors.name && (
-            <p className="mt-1.5 text-xs text-red-600 font-mono-data">{errors.name}</p>
-          )}
-        </div>
 
-        {/* Company Name */}
-        <div>
-          <label
-            htmlFor="new-user-company"
-            className="block font-mono-data text-xs uppercase tracking-wider font-semibold text-[#0A0A0A] mb-1.5"
-          >
-            Company / Export Enterprise
-          </label>
-          <div className="relative">
-            <input
-              id="new-user-company"
-              type="text"
-              value={company}
-              onChange={(e) => {
-                setCompany(e.target.value);
-                if (errors.company) setErrors((prev) => ({ ...prev, company: undefined }));
-              }}
-              placeholder="e.g. Singhania Global Apparel"
-              className={`w-full px-4 py-3.5 pl-11 rounded-xl bg-white border-2 text-[#0A0A0A] placeholder:text-[#706E6B]/50 font-body text-base transition-all focus:outline-none ${
-                errors.company
-                  ? "border-red-500 focus:border-red-500"
-                  : "border-black/10 focus:border-[#0A0A0A]"
-              }`}
-            />
-            <Building2 className="h-5 w-5 text-[#706E6B] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-          </div>
-          {errors.company && (
-            <p className="mt-1.5 text-xs text-red-600 font-mono-data">{errors.company}</p>
-          )}
-        </div>
-
-        {/* Business Email */}
-        <div>
-          <label
-            htmlFor="new-user-email"
-            className="block font-mono-data text-xs uppercase tracking-wider font-semibold text-[#0A0A0A] mb-1.5"
-          >
-            Business Email
-          </label>
-          <div className="relative">
+          {/* 2. Business Email */}
+          <div>
+            <label
+              htmlFor="new-user-email"
+              className="block font-mono-data text-xs uppercase tracking-wider font-semibold text-[#0A0A0A]/90 mb-1.5 text-left"
+            >
+              Email Address
+            </label>
             <input
               id="new-user-email"
               type="email"
+              autoComplete="email"
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
                 if (errors.email) setErrors((prev) => ({ ...prev, email: undefined }));
               }}
-              placeholder="ananya@singhaniaglobal.com"
-              className={`w-full px-4 py-3.5 pl-11 rounded-xl bg-white border-2 text-[#0A0A0A] placeholder:text-[#706E6B]/50 font-body text-base transition-all focus:outline-none ${
+              placeholder="name@enterprise.com"
+              className={`w-full px-4 py-3.5 rounded-xl bg-[#FAF7F0]/50 border text-[#0A0A0A] placeholder:text-[#706E6B]/40 font-body text-base transition-all duration-200 focus:outline-none focus:bg-white focus:border-[#FF4D1C] focus:ring-2 focus:ring-[#FF4D1C]/20 ${
                 errors.email
-                  ? "border-red-500 focus:border-red-500"
-                  : "border-black/10 focus:border-[#0A0A0A]"
+                  ? "border-red-500 focus:border-red-500 focus:ring-red-500/20"
+                  : "border-black/15"
               }`}
             />
-            <Mail className="h-5 w-5 text-[#706E6B] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+            {errors.email && (
+              <p className="mt-1.5 text-xs text-red-600 font-mono-data text-left">{errors.email}</p>
+            )}
           </div>
-          {errors.email && (
-            <p className="mt-1.5 text-xs text-red-600 font-mono-data">{errors.email}</p>
-          )}
-        </div>
 
-        {/* Single Continue Button */}
-        <div className="pt-3">
-          <button
-            type="submit"
-            className="w-full group flex items-center justify-center gap-2 py-4 px-6 rounded-xl bg-[#0A0A0A] text-white font-display font-semibold text-lg border-2 border-[#0A0A0A] hover:border-[#FF4D1C] shadow-sm hover:shadow-card transition-all duration-200 hover:-translate-y-0.5"
-          >
-            <span>Continue to Corridor Selection</span>
-            <ArrowRight className="h-5 w-5 text-white/70 group-hover:text-white group-hover:translate-x-1 transition-all" />
-          </button>
-        </div>
-
-        {onBack && (
-          <div className="text-center pt-2">
-            <button
-              type="button"
-              onClick={onBack}
-              className="font-mono-data text-xs text-[#706E6B] hover:text-[#0A0A0A] transition-colors underline underline-offset-4"
+          {/* 3. Password */}
+          <div>
+            <label
+              htmlFor="new-user-password"
+              className="block font-mono-data text-xs uppercase tracking-wider font-semibold text-[#0A0A0A]/90 mb-1.5 text-left"
             >
-              ← Back to entry screen
+              Password
+            </label>
+            <div className="relative">
+              <input
+                id="new-user-password"
+                type={showPassword ? "text" : "password"}
+                autoComplete="new-password"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  if (errors.password) setErrors((prev) => ({ ...prev, password: undefined }));
+                }}
+                placeholder="••••••••••••"
+                className={`w-full px-4 py-3.5 pr-12 rounded-xl bg-[#FAF7F0]/50 border text-[#0A0A0A] placeholder:text-[#706E6B]/40 font-body text-base transition-all duration-200 focus:outline-none focus:bg-white focus:border-[#FF4D1C] focus:ring-2 focus:ring-[#FF4D1C]/20 ${
+                  errors.password
+                    ? "border-red-500 focus:border-red-500 focus:ring-red-500/20"
+                    : "border-black/15"
+                }`}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#706E6B] hover:text-[#0A0A0A] p-1.5 rounded-lg transition-colors focus:outline-none"
+                aria-label={showPassword ? "Hide password" : "Show password"}
+              >
+                {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+              </button>
+            </div>
+            {errors.password && (
+              <p className="mt-1.5 text-xs text-red-600 font-mono-data text-left">{errors.password}</p>
+            )}
+          </div>
+
+          {/* Primary Action Button */}
+          <div className="pt-2">
+            <button
+              type="submit"
+              className="w-full group flex items-center justify-center gap-2 py-4 px-6 rounded-xl bg-[#FF4D1C] hover:bg-[#E03D0F] text-white font-display font-semibold text-base sm:text-lg shadow-sm hover:shadow-md transition-all duration-200 active:scale-[0.99]"
+            >
+              <span>Continue</span>
+              <ArrowRight className="h-5 w-5 text-white/80 group-hover:text-white group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
-        )}
-      </form>
+
+          {/* Privacy & Demo Disclosure */}
+          <p className="pt-1 text-center font-mono-data text-[11px] text-[#706E6B]/80 leading-relaxed">
+            This is a demo environment. Nothing you enter here is stored or transmitted.
+          </p>
+        </form>
+      </motion.div>
+
+      {/* Back Link */}
+      {onBack && (
+        <div className="text-center pt-4">
+          <button
+            type="button"
+            onClick={onBack}
+            className="font-mono-data text-xs text-[#706E6B] hover:text-[#0A0A0A] transition-colors underline underline-offset-4"
+          >
+            ← Back to entry screen
+          </button>
+        </div>
+      )}
     </div>
   );
 };
+

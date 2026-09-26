@@ -102,14 +102,14 @@ export const MarketAccessWizard: React.FC = () => {
   };
 
   // Handler for Screen 1b Sign In (Existing customer)
-  const handleSignInContinue = (data: { name: string; pan: string; email: string }) => {
+  const handleSignInContinue = (data: { name: string; email: string }) => {
     setUserData(data);
     setIsExistingCustomer(true);
     setCurrentStep("hub");
   };
 
   // Handler for New Customer Info Capture
-  const handleNewCustomerInfoContinue = (data: { name: string; company: string; email: string }) => {
+  const handleNewCustomerInfoContinue = (data: { name: string; email: string }) => {
     setUserData(data);
     setCurrentStep("inputs");
   };
