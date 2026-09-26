@@ -1,9 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Instrument_Serif, Inter, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
-import { RouteSplashScreen } from "@/components/ui/RouteSplashScreen";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -56,11 +53,8 @@ export default function RootLayout({
       lang="en"
       className={`${fraunces.variable} ${instrumentSerif.variable} ${inter.variable} ${ibmPlexMono.variable}`}
     >
-      <body className="min-h-screen bg-[#FAF7F0] font-body text-[#0A0A0A] selection:bg-[#FF4D1C] selection:text-white flex flex-col antialiased">
-        <RouteSplashScreen />
-        <Header />
+      <body className="min-h-screen bg-[#FAF7F0] font-body text-[#0A0A0A] selection:bg-[#FF4D1C] selection:text-white antialiased overflow-x-hidden flex flex-col">
         <main className="flex-1 flex flex-col relative">{children}</main>
-        <Footer />
       </body>
     </html>
   );
