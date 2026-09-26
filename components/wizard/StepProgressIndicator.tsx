@@ -19,15 +19,38 @@ export const StepProgressIndicator: React.FC<StepProgressIndicatorProps> = ({
     return null;
   }
 
-  let progress = 0;
+  let progress = 0.16;
   let totalSteps = 6;
 
   if (isExistingCustomer === true) {
-    totalSteps = 2;
-    if (currentStep === "entry") {
-      progress = 1 / 2;
-    } else if (currentStep === "existing-customer") {
-      progress = 2 / 2;
+    totalSteps = 3;
+    switch (currentStep) {
+      case "signin":
+        progress = 1 / 3;
+        break;
+      case "hub":
+        progress = 2 / 3;
+        break;
+      case "trade-insights":
+      case "standalone-compliance":
+      case "partner-network":
+        progress = 3 / 3;
+        break;
+      case "inputs":
+        progress = 2 / 4;
+        break;
+      case "tier1-readiness":
+        progress = 3 / 5;
+        break;
+      case "tier2-compliance":
+        progress = 4 / 5;
+        break;
+      case "tier3-settlement":
+      case "tier45-preview":
+        progress = 5 / 5;
+        break;
+      default:
+        progress = 1 / 3;
     }
   } else {
     totalSteps = 6;
@@ -55,7 +78,7 @@ export const StepProgressIndicator: React.FC<StepProgressIndicatorProps> = ({
     }
   }
 
-  const percentage = progress * 100;
+  const percentage = Math.min(Math.max(progress * 100, 10), 100);
 
   return (
     <div

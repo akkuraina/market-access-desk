@@ -1,15 +1,19 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence, useReducedMotion, Variants } from "framer-motion";
 import { InitialLoader } from "@/components/wizard/InitialLoader";
 import { StepEntry } from "@/components/wizard/StepEntry";
+import { StepSignIn } from "@/components/wizard/StepSignIn";
+import { StepExistingHub, ExistingHubOption } from "@/components/wizard/StepExistingHub";
+import { StepTradeInsightsSequential } from "@/components/wizard/StepTradeInsightsSequential";
+import { StepStandaloneCompliance } from "@/components/wizard/StepStandaloneCompliance";
+import { StepPartnerNetworkPreview } from "@/components/wizard/StepPartnerNetworkPreview";
 import { StepInputs } from "@/components/wizard/StepInputs";
 import { StepTier1Readiness } from "@/components/wizard/StepTier1Readiness";
 import { StepTier2Compliance } from "@/components/wizard/StepTier2Compliance";
 import { StepTier3Settlement } from "@/components/wizard/StepTier3Settlement";
 import { StepTier45Preview } from "@/components/wizard/StepTier45Preview";
-import { StepExistingCustomer } from "@/components/wizard/StepExistingCustomer";
 import { StepProgressIndicator } from "@/components/wizard/StepProgressIndicator";
 import {
   TargetMarket,
@@ -21,17 +25,22 @@ import {
 export type WizardStep =
   | "loader"
   | "entry"
+  | "signin"
+  | "hub"
   | "inputs"
   | "tier1-readiness"
   | "tier2-compliance"
   | "tier3-settlement"
   | "tier45-preview"
-  | "existing-customer";
+  | "standalone-compliance"
+  | "trade-insights"
+  | "partner-network";
 
 export const MarketAccessWizard: React.FC = () => {
   const shouldReduceMotion = useReducedMotion();
   const [currentStep, setCurrentStep] = useState<WizardStep>("loader");
   const [isExistingCustomer, setIsExistingCustomer] = useState<boolean | null>(null);
+  const [userData, setUserData] = useState<{ name: string; pan: string; email: string } | null>(null);
   const [selectedMarket, setSelectedMarket] = useState<TargetMarket>("United Kingdom");
   const [selectedIndustry, setSelectedIndustry] = useState<Industry>("Textiles & Apparel");
   const [readinessResult, setReadinessResult] = useState<ReadinessResult | null>(null);
@@ -64,10 +73,40 @@ export const MarketAccessWizard: React.FC = () => {
   const handleEntrySelect = (isExisting: boolean) => {
     setIsExistingCustomer(isExisting);
     if (isExisting) {
-      setCurrentStep("existing-customer");
+      setCurrentStep("signin");
     } else {
       setCurrentStep("inputs");
     }
+  };
+
+  // Handler for Screen 1b Sign In
+  const handleSignInContinue = (data: { name: string; pan: string; email: string }) => {
+    setUserData(data);
+    setIsExistingCustomer(true);
+    setCurrentStep("hub");
+  };
+
+  // Handler for Hub Options
+  const handleHubSelectOption = (option: ExistingHubOption) => {
+    switch (option) {
+      case "expand-market":
+        setCurrentStep("inputs");
+        break;
+      case "check-compliance":
+        setCurrentStep("standalone-compliance");
+        break;
+      case "trade-insights":
+        setCurrentStep("trade-insights");
+        break;
+      case "partner-network":
+        setCurrentStep("partner-network");
+        break;
+    }
+  };
+
+  // Handler for Return to Hub
+  const handleReturnToHub = () => {
+    setCurrentStep("hub");
   };
 
   // Handler for Screen 2 Inputs
@@ -91,6 +130,7 @@ export const MarketAccessWizard: React.FC = () => {
   // Handler to restart demo
   const handleRestart = () => {
     setIsExistingCustomer(null);
+    setUserData(null);
     setReadinessResult(null);
     setCurrentStep("entry");
   };
@@ -118,6 +158,78 @@ export const MarketAccessWizard: React.FC = () => {
             className="w-full flex justify-center"
           >
             <StepEntry onSelect={handleEntrySelect} />
+          </motion.div>
+        )}
+
+        {currentStep === "signin" && (
+          <motion.div
+            key="signin"
+            variants={variants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            className="w-full flex justify-center"
+          >
+            <StepSignIn
+              onContinue={handleSignInContinue}
+              onBack={() => setCurrentStep("entry")}
+            />
+          </motion.div>
+        )}
+
+        {currentStep === "hub" && userData && (
+          <motion.div
+            key="hub"
+            variants={variants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            className="w-full flex justify-center"
+          >
+            <StepExistingHub
+              userName={userData.name}
+              onSelectOption={handleHubSelectOption}
+              onRestart={handleRestart}
+            />
+          </motion.div>
+        )}
+
+        {currentStep === "trade-insights" && (
+          <motion.div
+            key="trade-insights"
+            variants={variants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            className="w-full flex justify-center"
+          >
+            <StepTradeInsightsSequential onReturnToHub={handleReturnToHub} />
+          </motion.div>
+        )}
+
+        {currentStep === "standalone-compliance" && (
+          <motion.div
+            key="standalone-compliance"
+            variants={variants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            className="w-full flex justify-center"
+          >
+            <StepStandaloneCompliance onReturnToHub={handleReturnToHub} />
+          </motion.div>
+        )}
+
+        {currentStep === "partner-network" && (
+          <motion.div
+            key="partner-network"
+            variants={variants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            className="w-full flex justify-center"
+          >
+            <StepPartnerNetworkPreview onReturnToHub={handleReturnToHub} />
           </motion.div>
         )}
 
@@ -150,6 +262,7 @@ export const MarketAccessWizard: React.FC = () => {
             <StepTier1Readiness
               result={readinessResult}
               onNext={() => setCurrentStep("tier2-compliance")}
+              onReturnToHub={isExistingCustomer ? handleReturnToHub : undefined}
             />
           </motion.div>
         )}
@@ -166,6 +279,7 @@ export const MarketAccessWizard: React.FC = () => {
             <StepTier2Compliance
               result={readinessResult}
               onNext={() => setCurrentStep("tier3-settlement")}
+              onReturnToHub={isExistingCustomer ? handleReturnToHub : undefined}
             />
           </motion.div>
         )}
@@ -182,6 +296,8 @@ export const MarketAccessWizard: React.FC = () => {
             <StepTier3Settlement
               targetMarket={selectedMarket}
               onNext={() => setCurrentStep("tier45-preview")}
+              onReturnToHub={isExistingCustomer ? handleReturnToHub : undefined}
+              isExistingCustomer={isExistingCustomer}
             />
           </motion.div>
         )}
@@ -195,20 +311,11 @@ export const MarketAccessWizard: React.FC = () => {
             exit="exit"
             className="w-full flex justify-center"
           >
-            <StepTier45Preview onRestart={handleRestart} />
-          </motion.div>
-        )}
-
-        {currentStep === "existing-customer" && (
-          <motion.div
-            key="existing-customer"
-            variants={variants}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            className="w-full flex justify-center"
-          >
-            <StepExistingCustomer onRestart={handleRestart} />
+            <StepTier45Preview
+              onRestart={handleRestart}
+              onReturnToHub={isExistingCustomer ? handleReturnToHub : undefined}
+              isExistingCustomer={isExistingCustomer}
+            />
           </motion.div>
         )}
       </AnimatePresence>
