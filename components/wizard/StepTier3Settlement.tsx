@@ -13,6 +13,7 @@ import {
   ShieldCheck,
   Building,
   Coins,
+  ExternalLink,
 } from "lucide-react";
 
 interface StepTier3SettlementProps {
@@ -433,39 +434,37 @@ export const StepTier3Settlement: React.FC<StepTier3SettlementProps> = ({
         })}
       </div>
 
-      {/* Primary Action Button */}
-      {isExistingCustomer ? (
-        <div className="w-full flex flex-col sm:flex-row gap-3 justify-center">
-          <button
-            type="button"
-            onClick={onReturnToHub}
-            className="flex-1 group flex items-center justify-center gap-2 py-4 px-8 rounded-xl bg-[#0A0A0A] text-white font-display font-semibold text-lg border-2 border-[#0A0A0A] hover:border-[#FF4D1C] shadow-sm hover:shadow-card transition-all duration-200 hover:-translate-y-0.5"
+      {/* Action Buttons: Primary External Conversion + Secondary Demo Navigation */}
+      <div className="w-full space-y-2.5">
+        <div className="w-full flex flex-col sm:flex-row gap-3 items-stretch justify-center">
+          <a
+            href="https://www.tradepe.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 group inline-flex items-center justify-center gap-2 py-4 px-6 rounded-xl bg-[#FF4D1C] text-white font-display font-semibold text-base sm:text-lg border-2 border-[#FF4D1C] hover:bg-[#E03D0E] hover:border-[#E03D0E] shadow-sm hover:shadow-card transition-all duration-200 hover:-translate-y-0.5 text-center"
           >
-            <ArrowLeft className="h-5 w-5 text-white/70 group-hover:text-white group-hover:-translate-x-1 transition-all" />
-            <span>Return to client portal</span>
-          </button>
+            <span>Open a TradePe Account</span>
+            <ExternalLink className="h-4 w-4 text-white/80 group-hover:text-white transition-all shrink-0" />
+          </a>
+
           <button
             type="button"
             onClick={onNext}
-            className="flex-1 group flex items-center justify-center gap-2 py-4 px-8 rounded-xl bg-white text-[#0A0A0A] font-display font-semibold text-lg border-2 border-black/10 hover:border-black shadow-sm transition-all duration-200 hover:-translate-y-0.5"
+            className="flex-1 group flex items-center justify-center gap-2 py-4 px-6 rounded-xl bg-white text-[#0A0A0A] font-display font-semibold text-base sm:text-lg border-2 border-black/10 hover:border-black shadow-sm transition-all duration-200 hover:-translate-y-0.5 text-center"
           >
-            <span>Preview Ecosystem Roadmap</span>
-            <ArrowRight className="h-5 w-5 text-black/40 group-hover:text-black group-hover:translate-x-1 transition-all" />
+            <span>Continue to Ecosystem Preview</span>
+            <ArrowRight className="h-4 w-4 text-black/40 group-hover:text-black group-hover:translate-x-1 transition-all shrink-0" />
           </button>
         </div>
-      ) : (
-        <button
-          type="button"
-          onClick={onNext}
-          className="w-full group flex items-center justify-center gap-2 py-4 px-6 rounded-xl bg-[#0A0A0A] text-white font-display font-semibold text-lg border-2 border-[#0A0A0A] hover:border-[#FF4D1C] shadow-sm hover:shadow-card transition-all duration-200 hover:-translate-y-0.5"
-        >
-          <span>Continue to Ecosystem Preview</span>
-          <ArrowRight className="h-5 w-5 text-white/70 group-hover:text-white group-hover:translate-x-1 transition-all" />
-        </button>
-      )}
 
-      {onReturnToHub && !isExistingCustomer && (
-        <div className="mt-4">
+        {/* Microcopy disclaimer */}
+        <p className="font-mono-data text-[11px] text-[#706E6B] text-center">
+          Opens TradePe&apos;s live platform in a new tab
+        </p>
+      </div>
+
+      {onReturnToHub && (
+        <div className="mt-3">
           <button
             type="button"
             onClick={onReturnToHub}

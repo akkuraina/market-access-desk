@@ -120,7 +120,7 @@ export const StepProfileSnapshot: React.FC<StepProfileSnapshotProps> = ({
           </div>
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <span className="text-2xl">{getCorridorFlag(resolvedMarket)}</span>
+              <span className="text-2xl"></span>
               <span className="font-display font-bold text-xl text-[#0A0A0A]">
                 {resolvedMarket}
               </span>
@@ -227,9 +227,6 @@ export const StepProfileSnapshot: React.FC<StepProfileSnapshotProps> = ({
         transition={{ duration: 0.5, delay: 0.3 }}
         className="my-6 max-w-xl"
       >
-        <p className="font-display font-semibold text-lg sm:text-xl text-[#0A0A0A] italic tracking-tight">
-          &ldquo;This is the start of your TradePe growth profile. It grows as you do.&rdquo;
-        </p>
       </motion.div>
 
       {/* Single Final Action Button */}

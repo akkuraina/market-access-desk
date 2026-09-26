@@ -428,18 +428,21 @@ export const SettlementSetupClient: React.FC = () => {
 
           <div className="lg:col-span-4 flex flex-col gap-3 justify-end">
             <a
-              href="https://tradepe-landing.vercel.app"
+              href="https://www.tradepe.com"
               target="_blank"
               rel="noopener noreferrer"
               className="w-full"
             >
               <Button variant="orange" size="xl" className="w-full justify-between group text-base sm:text-lg">
                 <span className="inline-flex items-center gap-1.5 text-white font-semibold">
-                  Get Started with <TradePeWordmark asLink={false} variant="white" />
+                  Open a TradePe Account
                 </span>
                 <ArrowRight className="h-5 w-5 text-white transition-transform group-hover:translate-x-1" />
               </Button>
             </a>
+            <p className="font-mono-data text-[11px] text-[#706E6B] text-center">
+              Opens TradePe&apos;s live platform in a new tab
+            </p>
             <Link href="/readiness-score" className="w-full">
               <Button
                 variant="ghost"
