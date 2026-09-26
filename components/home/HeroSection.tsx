@@ -54,7 +54,7 @@ export const HeroSection: React.FC = () => {
             </Link>
             <Link href="#architecture">
               <Button variant="secondary" size="lg">
-                <span>Explore 5-Tier Spec</span>
+                <span>Explore Desk Architecture</span>
               </Button>
             </Link>
           </div>

@@ -67,7 +67,7 @@ export const StepNewCustomerInfo: React.FC<StepNewCustomerInfoProps> = ({
           </span>
         </div>
         <h1 className="font-display font-bold text-4xl sm:text-5xl text-[#0A0A0A] tracking-tight leading-[1.1] mb-3">
-          Hi — a few details to get started.
+          Hi, a few details to get started.
         </h1>
         <p className="font-body text-base sm:text-lg text-[#706E6B] font-light leading-relaxed">
           Let&apos;s personalize your global direct-clearing readiness journey.

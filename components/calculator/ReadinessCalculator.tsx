@@ -752,7 +752,7 @@ export const ReadinessCalculator: React.FC = () => {
                     <div className="pt-2">
                       <Link href="/compliance-navigator" className="w-full block">
                         <Button variant="outline" size="sm" className="w-full justify-between font-mono-data text-xs">
-                          <span>Explore Tier 2 Navigator Checklist</span>
+                          <span>Explore Compliance Navigator Checklist</span>
                           <ArrowRight className="h-3.5 w-3.5 ml-1" />
                         </Button>
                       </Link>
@@ -761,13 +761,13 @@ export const ReadinessCalculator: React.FC = () => {
                 </div>
               </div>
 
-              {/* Flagship Tier 1 → Tier 3 Settlement Bridge Card */}
+              {/* Flagship Readiness → Settlement Bridge Card */}
               <div className="rounded-3xl border border-black bg-[#0A0A0A] text-white p-8 sm:p-10 shadow-card">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                   <div className="lg:col-span-8 space-y-4">
                     <div className="flex items-center gap-2">
                       <span className="font-mono-data text-xs text-[#FF4D1C] font-semibold bg-[#FF4D1C]/15 border border-[#FF4D1C]/30 px-2.5 py-1 rounded-full">
-                        TIER 1 → TIER 3 ARCHITECTURE BRIDGE
+                        READINESS → SETTLEMENT ARCHITECTURE BRIDGE
                       </span>
                     </div>
 

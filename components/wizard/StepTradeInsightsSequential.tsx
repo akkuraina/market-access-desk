@@ -134,7 +134,7 @@ export const StepTradeInsightsSequential: React.FC<StepTradeInsightsSequentialPr
                   </span>
                 </div>
                 <span className="font-body text-xs text-[#706E6B]">
-                  vs. 3–5 days standard SWIFT
+                  vs. 3-5 days standard SWIFT
                 </span>
               </div>
 

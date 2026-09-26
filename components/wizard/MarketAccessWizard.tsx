@@ -59,8 +59,8 @@ export const MarketAccessWizard: React.FC = () => {
     email: string;
     pan?: string;
   } | null>(null);
-  const [selectedMarket, setSelectedMarket] = useState<TargetMarket>("United Kingdom");
-  const [selectedIndustry, setSelectedIndustry] = useState<Industry>("Textiles & Apparel");
+  const [selectedMarket, setSelectedMarket] = useState<TargetMarket | null>(null);
+  const [selectedIndustry, setSelectedIndustry] = useState<Industry | null>(null);
   const [readinessResult, setReadinessResult] = useState<ReadinessResult | null>(null);
   const [hubReturnMessage, setHubReturnMessage] = useState<{ headline: string; subtext: string }>({
     headline: "Diagnostic Complete",
@@ -160,6 +160,8 @@ export const MarketAccessWizard: React.FC = () => {
   const handleRestart = () => {
     setIsExistingCustomer(null);
     setUserData(null);
+    setSelectedMarket(null);
+    setSelectedIndustry(null);
     setReadinessResult(null);
     setCurrentStep("entry");
   };
@@ -266,7 +268,7 @@ export const MarketAccessWizard: React.FC = () => {
             <StepTradeInsightsSequential
               onReturnToHub={() =>
                 triggerHubReturn(
-                  "Trade Insights — reviewed.",
+                  "Trade Insights: Reviewed.",
                   "Returning to your client portal."
                 )
               }
@@ -287,7 +289,7 @@ export const MarketAccessWizard: React.FC = () => {
             <StepStandaloneCompliance
               onReturnToHub={() =>
                 triggerHubReturn(
-                  "Compliance Checklist — reviewed.",
+                  "Compliance Checklist: Reviewed.",
                   "Returning to your client portal."
                 )
               }
@@ -308,7 +310,7 @@ export const MarketAccessWizard: React.FC = () => {
             <StepPartnerNetworkPreview
               onReturnToHub={() =>
                 triggerHubReturn(
-                  "Partner Network — previewed.",
+                  "Partner Network: Previewed.",
                   "Returning to your client portal."
                 )
               }
@@ -334,18 +336,18 @@ export const MarketAccessWizard: React.FC = () => {
           </motion.div>
         )}
 
-        {/* Transition: Inputs -> Tier 1 */}
+        {/* Transition: Inputs -> Readiness */}
         {currentStep === "transition-to-tier1" && (
           <StepTierCompleteTransition
             key="transition-to-tier1"
             badge="PROFILE CAPTURED"
-            headline="Corridor & Sector — selected."
-            subtext="Let's compute your Tier 1: Readiness Score."
+            headline="Corridor and sector selected."
+            subtext="Let's compute your Market Readiness Score."
             onComplete={() => setCurrentStep("tier1-readiness")}
           />
         )}
 
-        {/* Tier 1 Readiness Score */}
+        {/* Market Readiness Score */}
         {currentStep === "tier1-readiness" && readinessResult && (
           <motion.div
             key="tier1-readiness"
@@ -363,7 +365,7 @@ export const MarketAccessWizard: React.FC = () => {
                 isExistingCustomer
                   ? () =>
                       triggerHubReturn(
-                        "Readiness Score — calculated.",
+                        "Market Readiness Score: Computed.",
                         "Returning to your client portal."
                       )
                   : undefined
@@ -372,18 +374,18 @@ export const MarketAccessWizard: React.FC = () => {
           </motion.div>
         )}
 
-        {/* Transition: Tier 1 -> Tier 2 */}
+        {/* Transition: Readiness -> Compliance */}
         {currentStep === "transition-to-tier2" && (
           <StepTierCompleteTransition
             key="transition-to-tier2"
-            badge="TIER 1 COMPLETE"
-            headline="Readiness Diagnostic — scored."
-            subtext="Let's move to Tier 2: Compliance Checklist."
+            badge="READINESS COMPLETE"
+            headline="Market Readiness Score computed."
+            subtext="Let's move to Compliance Navigator."
             onComplete={() => setCurrentStep("tier2-compliance")}
           />
         )}
 
-        {/* Tier 2 Compliance Checklist */}
+        {/* Compliance Navigator */}
         {currentStep === "tier2-compliance" && readinessResult && (
           <motion.div
             key="tier2-compliance"
@@ -401,7 +403,7 @@ export const MarketAccessWizard: React.FC = () => {
                 isExistingCustomer
                   ? () =>
                       triggerHubReturn(
-                        "Compliance Checklist — reviewed.",
+                        "Compliance Checklist: Reviewed.",
                         "Returning to your client portal."
                       )
                   : undefined
@@ -410,18 +412,18 @@ export const MarketAccessWizard: React.FC = () => {
           </motion.div>
         )}
 
-        {/* Transition: Tier 2 -> Tier 3 */}
+        {/* Transition: Compliance -> Settlement */}
         {currentStep === "transition-to-tier3" && (
           <StepTierCompleteTransition
             key="transition-to-tier3"
-            badge="TIER 2 COMPLETE"
-            headline="Regulatory Filings — mapped."
-            subtext="Let's move to Tier 3: Settlement Setup."
+            badge="COMPLIANCE MAPPED"
+            headline="Regulatory filings mapped."
+            subtext="Let's move to Settlement Setup."
             onComplete={() => setCurrentStep("tier3-settlement")}
           />
         )}
 
-        {/* Tier 3 Settlement */}
+        {/* Settlement Setup */}
         {currentStep === "tier3-settlement" && (
           <motion.div
             key="tier3-settlement"
@@ -432,14 +434,14 @@ export const MarketAccessWizard: React.FC = () => {
             className="w-full flex justify-center"
           >
             <StepTier3Settlement
-              targetMarket={selectedMarket}
+              targetMarket={selectedMarket || "United Kingdom"}
               userName={userData?.name}
               onNext={() => setCurrentStep("transition-to-tier45")}
               onReturnToHub={
                 isExistingCustomer
                   ? () =>
                       triggerHubReturn(
-                        "Settlement Rails — verified.",
+                        "Settlement Rails: Verified.",
                         "Returning to your client portal."
                       )
                   : undefined
@@ -449,13 +451,13 @@ export const MarketAccessWizard: React.FC = () => {
           </motion.div>
         )}
 
-        {/* Transition: Tier 3 -> Tier 4/5 */}
+        {/* Transition: Settlement -> Partner Network & Trade Insights */}
         {currentStep === "transition-to-tier45" && (
           <StepTierCompleteTransition
             key="transition-to-tier45"
-            badge="TIER 3 COMPLETE"
-            headline="Settlement Rails — configured."
-            subtext="Let's move to Tier 4 & 5: Ecosystem Suite."
+            badge="SETTLEMENT CONFIGURED"
+            headline="Settlement rails configured."
+            subtext="Let's move to Partner Network & Trade Insights."
             onComplete={() => setCurrentStep("tier45-preview")}
           />
         )}
@@ -477,7 +479,7 @@ export const MarketAccessWizard: React.FC = () => {
                 isExistingCustomer
                   ? () =>
                       triggerHubReturn(
-                        "Ecosystem Suite — previewed.",
+                        "Ecosystem Suite: Previewed.",
                         "Returning to your client portal."
                       )
                   : undefined
@@ -492,7 +494,7 @@ export const MarketAccessWizard: React.FC = () => {
           <StepTierCompleteTransition
             key="transition-to-profile"
             badge="PORTFOLIO READY"
-            headline="Market Access Profile — assembled."
+            headline="Market Access Profile assembled."
             subtext="Generating your verified TradePe growth snapshot."
             onComplete={() => setCurrentStep("profile-snapshot")}
           />

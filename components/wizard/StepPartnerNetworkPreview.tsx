@@ -13,7 +13,7 @@ export const StepPartnerNetworkPreview: React.FC<StepPartnerNetworkPreviewProps>
   const pillars = [
     {
       icon: Building2,
-      title: "Vetted Tier-1 Distributors & Retail Consortia",
+      title: "Vetted Institutional Distributors & Retail Consortia",
       description:
         "Direct commercial introductions to pre-screened regional wholesalers, licensed importers, and authorized trade houses in destination markets.",
       deliverables: "Financial solvency underwriting & commercial channel distribution agreements.",
@@ -29,7 +29,7 @@ export const StepPartnerNetworkPreview: React.FC<StepPartnerNetworkPreviewProps>
       icon: Scale,
       title: "Automated HS-Code RFQ Matchmaking",
       description:
-        "Automated protocol matching your verified HS code catalogue and Tier 1 Readiness Profile with active institutional buyer procurement tenders.",
+        "Automated protocol matching your verified HS code catalogue and Market Readiness Profile with active institutional buyer procurement tenders.",
       deliverables: "Level 3 KYC buyer badges & standardized bilingual trade contracts.",
     },
   ];
@@ -41,11 +41,11 @@ export const StepPartnerNetworkPreview: React.FC<StepPartnerNetworkPreviewProps>
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/5 border border-black/10 mb-3">
           <Sparkles className="h-3.5 w-3.5 text-[#FF4D1C]" />
           <span className="font-mono-data text-[11px] uppercase tracking-wider font-semibold text-[#0A0A0A]">
-            Tier 4 Ecosystem Roadmap (Phase 2 Preview)
+            Partner Network Roadmap (Phase 2 Preview)
           </span>
         </div>
         <h1 className="font-display font-bold text-4xl sm:text-5xl text-[#0A0A0A] tracking-tight leading-[1.1] mb-2">
-          Vetted Partner Network
+          Partner Network
         </h1>
         <p className="font-body text-base sm:text-lg text-[#706E6B] font-light leading-relaxed">
           Pre-screened overseas distributors and bonded port infrastructure launching in Phase 2.

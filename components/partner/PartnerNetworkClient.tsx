@@ -43,7 +43,7 @@ const ECOSYSTEM_PILLARS = [
     icon: Network,
     title: "Structured Commercial Matching",
     description:
-      "Automated protocol matching your certified HS code product lines and Tier 1 Readiness Profile with active buyer procurement tenders and institutional distributor RFQs.",
+      "Automated protocol matching your certified HS code product lines and Market Readiness profile with active buyer procurement tenders and institutional distributor RFQs.",
     deliverables: [
       "Direct RFQ matchmaking based on HS codes",
       "Verified buyer verification badges (Level 3 KYC)",
@@ -54,7 +54,7 @@ const ECOSYSTEM_PILLARS = [
     icon: Scale,
     title: "Integrated Escrow Milestone Binding",
     description:
-      "Direct linkage to Tier 3 settlement infrastructure, locking buyer invoice funds in escrow until destination customs release or delivery confirmation milestones are verified.",
+      "Direct linkage to Settlement Setup infrastructure, locking buyer invoice funds in escrow until destination customs release or delivery confirmation milestones are verified.",
     deliverables: [
       "Inspection-conditional escrow releases",
       "Automated bill-of-lading title transfer triggers",
@@ -146,7 +146,7 @@ export const PartnerNetworkClient: React.FC = () => {
           </p>
 
           <p className="font-body text-sm sm:text-base text-brand-muted max-w-3xl leading-relaxed">
-            While Tiers 1 through 3 deliver the core mathematical readiness diagnostic, customs compliance vaults, and local currency banking rails, Tier 4 is actively being curated through formal bilateral business partnerships. Rather than deploying an unvetted directory, we are onboarding accredited institutional partners corridor by corridor.
+            While the Market Readiness Score, Compliance Navigator, and Settlement Setup deliver the core mathematical readiness diagnostic, customs compliance vaults, and local currency banking rails, the Partner Network is actively being curated through formal bilateral business partnerships. Rather than deploying an unvetted directory, we are onboarding accredited institutional partners corridor by corridor.
           </p>
 
           {/* Key Status Metrics */}
@@ -168,7 +168,7 @@ export const PartnerNetworkClient: React.FC = () => {
             <div className="rounded-xl bg-brand-bg p-3.5 border border-black/10">
               <p className="font-mono-data text-[10px] uppercase text-brand-muted">VETTING STANDARD</p>
               <p className="font-mono-data text-xs sm:text-sm font-semibold text-brand-dark mt-0.5">
-                Tier-1 / Level 3 KYC
+                Prime / Level 3 KYC
               </p>
             </div>
 
@@ -183,7 +183,7 @@ export const PartnerNetworkClient: React.FC = () => {
       </div>
 
       {/* ========================================================================= */}
-      {/* 2. WHAT TIER 4 WILL DELIVER (VISION ARCHITECTURE PILLARS)                 */}
+      {/* 2. WHAT PARTNER NETWORK WILL DELIVER (VISION ARCHITECTURE PILLARS)        */}
       {/* ========================================================================= */}
       <section className="space-y-8">
         <div className="max-w-3xl space-y-3">
@@ -194,7 +194,7 @@ export const PartnerNetworkClient: React.FC = () => {
             Institutional Network Capabilities Under Construction
           </h2>
           <p className="font-body text-sm sm:text-base text-brand-muted">
-            Every partner in Tier 4 is subjected to mandatory solvency auditing, compliance history verification, and operational capacity vetting.
+            Every partner in the Partner Network is subjected to mandatory solvency auditing, compliance history verification, and operational capacity vetting.
           </p>
         </div>
 
@@ -250,7 +250,7 @@ export const PartnerNetworkClient: React.FC = () => {
             MILESTONE TIMELINE
           </Badge>
           <h2 className="font-display text-2xl sm:text-3xl font-normal text-brand-dark">
-            Tier 4 Partner Network Roadmap
+            Partner Network Roadmap
           </h2>
           <p className="font-body text-sm text-brand-muted">
             Our staged deployment schedule ensuring regulatory and operational integrity before open commercial matchmaking.
@@ -417,7 +417,7 @@ export const PartnerNetworkClient: React.FC = () => {
 
                 <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
                   <span className="font-mono-data text-xs text-brand-muted">
-                    PRIVACY: No spam. Used strictly for Tier 4 priority matching.
+                    PRIVACY: No spam. Used strictly for Partner Network priority matching.
                   </span>
                   <Button type="submit" variant="orange" size="lg" className="gap-2 w-full sm:w-auto">
                     <Send className="h-4 w-4" />
@@ -442,7 +442,7 @@ export const PartnerNetworkClient: React.FC = () => {
                   Thank you for submitting details for <strong className="text-brand-dark">{companyName}</strong>. Your enterprise has been indexed for priority matchmaking across <strong className="text-brand-dark">{selectedCorridors.join(", ")}</strong> as Phase 2 partner hubs go live.
                 </p>
                 <div className="pt-2 font-mono-data text-xs text-brand-muted bg-white p-3 rounded-lg max-w-sm mx-auto border border-black/10">
-                  <span>CONFIRMATION_ID: MAD-T4-{Math.floor(100000 + Math.random() * 900000)}</span>
+                  <span>CONFIRMATION_ID: MAD-PN-{Math.floor(100000 + Math.random() * 900000)}</span>
                 </div>
               </motion.div>
             )}
@@ -451,7 +451,7 @@ export const PartnerNetworkClient: React.FC = () => {
       </div>
 
       {/* ========================================================================= */}
-      {/* 5. CROSS-TIER NAVIGATION: EXPLORE LIVE OPERATIONAL TIERS                 */}
+      {/* 5. CROSS-MODULE NAVIGATION: EXPLORE LIVE OPERATIONAL MODULES             */}
       {/* ========================================================================= */}
       <div className="rounded-2xl border border-black/10 bg-white p-6 sm:p-8 shadow-sm">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
@@ -460,19 +460,19 @@ export const PartnerNetworkClient: React.FC = () => {
               While Phase 2 is in preparation, explore our live tools
             </h3>
             <p className="font-body text-xs sm:text-sm text-brand-muted">
-              Complete your Tier 1 diagnostic score or review bilateral customs compliance protocols.
+              Complete your diagnostic score or review bilateral customs compliance protocols.
             </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
             <Link href="/readiness-score">
               <Button variant="secondary" size="sm">
-                <span>Calculate Readiness (Tier 1)</span>
+                <span>Market Readiness Score</span>
               </Button>
             </Link>
             <Link href="/compliance-navigator">
               <Button variant="primary" size="sm">
-                <span>Compliance Navigator (Tier 2)</span>
+                <span>Compliance Navigator</span>
               </Button>
             </Link>
           </div>

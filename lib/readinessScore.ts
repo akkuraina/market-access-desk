@@ -201,7 +201,7 @@ const CORRIDOR_MATRIX: Record<string, CorridorSpec> = {
       {
         id: "usd-fedwire",
         title: "US Domestic Fedwire / ACH Account",
-        description: "Local USD routing with Tier 1 clearing bank to collect without correspondent wire deductions.",
+        description: "Local USD routing with Prime clearing bank to collect without correspondent wire deductions.",
         mandatory: true,
         estimatedDays: 7,
       },
@@ -467,7 +467,7 @@ export function calculateReadinessScore(inputs: ReadinessInputs): ReadinessResul
         category: "Capital & Scale",
         points: 18,
         description:
-          "High-volume transaction capacity unlocks institutional FX treasury rates and Tier 1 banking rails.",
+          "High-volume transaction capacity unlocks institutional FX treasury rates and prime banking rails.",
       });
       break;
   }

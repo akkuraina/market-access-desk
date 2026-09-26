@@ -8,11 +8,11 @@ import { cn } from "@/lib/utils";
 import { TradePeWordmark } from "@/components/ui/TradePeWordmark";
 
 const navItems = [
-  { href: "/readiness-score", label: "Readiness Score", tier: "Tier 1" },
-  { href: "/compliance-navigator", label: "Compliance", tier: "Tier 2" },
-  { href: "/settlement-setup", label: "Settlement", tier: "Tier 3" },
-  { href: "/partner-network", label: "Partner Network", tier: "Tier 4", comingSoon: true },
-  { href: "/trade-insights", label: "Trade Insights", tier: "Tier 5" },
+  { href: "/readiness-score", label: "Readiness Score", tier: "01" },
+  { href: "/compliance-navigator", label: "Compliance", tier: "02" },
+  { href: "/settlement-setup", label: "Settlement", tier: "03" },
+  { href: "/partner-network", label: "Partner Network", tier: "04", comingSoon: true },
+  { href: "/trade-insights", label: "Trade Insights", tier: "05" },
 ];
 
 export const Header: React.FC = () => {

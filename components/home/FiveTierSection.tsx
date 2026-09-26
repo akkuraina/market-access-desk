@@ -36,7 +36,7 @@ const tiersData: TierItem[] = [
   {
     number: "01",
     code: "T1_DIAGNOSTIC",
-    tier: "Tier 1",
+    tier: "Module 01",
     title: "Market Readiness Score",
     href: "/readiness-score",
     status: "Live & Active",
@@ -59,7 +59,7 @@ const tiersData: TierItem[] = [
   {
     number: "02",
     code: "T2_COMPLIANCE",
-    tier: "Tier 2",
+    tier: "Module 02",
     title: "Regulatory & Compliance Navigator",
     href: "/compliance-navigator",
     status: "Live & Active",
@@ -82,7 +82,7 @@ const tiersData: TierItem[] = [
   {
     number: "03",
     code: "T3_SETTLEMENT",
-    tier: "Tier 3",
+    tier: "Module 03",
     title: "Local Settlement & Banking Setup",
     href: "/settlement-setup",
     status: "Live & Active",
@@ -105,12 +105,12 @@ const tiersData: TierItem[] = [
   {
     number: "04",
     code: "T4_NETWORK",
-    tier: "Tier 4",
+    tier: "Module 04",
     title: "Demand & Partner Network",
     href: "/partner-network",
     status: "Phase 2 Preview",
     isPhase2: true,
-    tagline: "Pre-screened Tier-1 distributors, bonded 3PL logistics hubs, and verified buyer consortia.",
+    tagline: "Pre-screened institutional distributors, bonded 3PL logistics hubs, and verified buyer consortia.",
     description:
       "Bilateral business onboarding connecting readiness-certified exporters with accredited destination distributors, JAFZA/Singapore bonded fulfillment centers, and verified buyer tenders.",
     deliverables: [
@@ -129,15 +129,15 @@ const tiersData: TierItem[] = [
   {
     number: "05",
     code: "T5_INTELLIGENCE",
-    tier: "Tier 5",
+    tier: "Module 05",
     title: "Trade Data Insights",
     href: "/trade-insights",
     status: "Live & Active",
     tagline: "Corridor settlement telemetry, peer expansion trajectories, and portable Expansion Credit Scores.",
     description:
-      "Transforms continuous cross-border transaction telemetry into underwriting intelligence—benchmarking unit economics and generating a portable credit score recognized by trade financiers.",
+      "Transforms continuous cross-border transaction telemetry into underwriting intelligence, benchmarking unit economics and generating a portable credit score recognized by trade financiers.",
     deliverables: [
-      "Cryptographic Expansion Credit Score (0–850 underwriting)",
+      "Cryptographic Expansion Credit Score (0-850 underwriting)",
       "Real-time monthly corridor settlement volume telemetry",
       "Peer cohort expansion recommendations based on HS codes",
       "Unit economics and clearing velocity benchmarks",
@@ -180,7 +180,7 @@ export const FiveTierSection: React.FC = () => {
             badge="OPERATIONAL ARCHITECTURE"
             title={
               <>
-                Five-Tier Market Access{" "}
+                Market Access Desk{" "}
                 <span className="font-italic-accent text-[#FF4D1C] font-normal italic">
                   Operating System
                 </span>

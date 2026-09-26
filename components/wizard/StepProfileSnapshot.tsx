@@ -18,8 +18,8 @@ interface StepProfileSnapshotProps {
   userName?: string;
   companyName?: string;
   isExistingCustomer?: boolean | null;
-  selectedMarket: TargetMarket;
-  selectedIndustry: Industry;
+  selectedMarket?: TargetMarket | null;
+  selectedIndustry?: Industry | null;
   readinessResult: ReadinessResult | null;
   onRestart: () => void;
 }
@@ -33,6 +33,8 @@ export const StepProfileSnapshot: React.FC<StepProfileSnapshotProps> = ({
   readinessResult,
   onRestart,
 }) => {
+  const resolvedMarket: TargetMarket = selectedMarket || "United Kingdom";
+  const resolvedIndustry: Industry = selectedIndustry || "Textiles & Apparel";
   const score = readinessResult?.overallScore || 78;
   const complexity = readinessResult?.regulatoryComplexity || "Low";
   const scoreBand = readinessResult?.scoreBand || "High Readiness";
@@ -118,13 +120,13 @@ export const StepProfileSnapshot: React.FC<StepProfileSnapshotProps> = ({
           </div>
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <span className="text-2xl">{getCorridorFlag(selectedMarket)}</span>
+              <span className="text-2xl">{getCorridorFlag(resolvedMarket)}</span>
               <span className="font-display font-bold text-xl text-[#0A0A0A]">
-                {selectedMarket}
+                {resolvedMarket}
               </span>
             </div>
             <span className="font-body text-xs text-[#706E6B]">
-              Sector: {selectedIndustry}
+              Sector: {resolvedIndustry}
             </span>
           </div>
         </div>
@@ -226,7 +228,7 @@ export const StepProfileSnapshot: React.FC<StepProfileSnapshotProps> = ({
         className="my-6 max-w-xl"
       >
         <p className="font-display font-semibold text-lg sm:text-xl text-[#0A0A0A] italic tracking-tight">
-          &ldquo;This is the start of your TradePe growth profile — it grows as you do.&rdquo;
+          &ldquo;This is the start of your TradePe growth profile. It grows as you do.&rdquo;
         </p>
       </motion.div>
 

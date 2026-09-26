@@ -31,12 +31,12 @@ export const StepExistingHub: React.FC<StepExistingHubProps> = ({
     description: string;
     icon: React.ElementType;
     badge: string;
-    tier: string;
+    moduleTag: string;
     highlightColor: string;
   }[] = [
     {
       id: "expand-market",
-      tier: "Tier 1 → Tier 3",
+      moduleTag: "Full Desk Suite",
       title: "Expand into a new market",
       description:
         "Run an end-to-end readiness diagnostic, compliance roadmap, and settlement rails setup for a new global corridor.",
@@ -46,7 +46,7 @@ export const StepExistingHub: React.FC<StepExistingHubProps> = ({
     },
     {
       id: "check-compliance",
-      tier: "Tier 2 Standalone",
+      moduleTag: "Compliance Guide",
       title: "Check regulatory compliance",
       description:
         "Instantly explore mandatory customs filings, bilateral treaty tariffs (CEPA/CECA), and local tax registrations.",
@@ -56,7 +56,7 @@ export const StepExistingHub: React.FC<StepExistingHubProps> = ({
     },
     {
       id: "trade-insights",
-      tier: "Tier 5 Telemetry",
+      moduleTag: "Growth Telemetry",
       title: "View your trade growth insights",
       description:
         "Inspect your quarterly USD/INR volume velocity, live settlement benchmarks, and AI-recommended expansion routes.",
@@ -66,10 +66,10 @@ export const StepExistingHub: React.FC<StepExistingHubProps> = ({
     },
     {
       id: "partner-network",
-      tier: "Tier 4 Roadmap",
+      moduleTag: "Ecosystem Network",
       title: "Explore the Partner Network",
       description:
-        "Preview direct commercial matchmaking with accredited Tier-1 overseas distributors and bonded port warehousing.",
+        "Preview direct commercial matchmaking with accredited institutional overseas distributors and bonded port warehousing.",
       icon: Network,
       badge: "Phase 2 Preview",
       highlightColor: "group-hover:border-[#0A0A0A]",
@@ -119,7 +119,7 @@ export const StepExistingHub: React.FC<StepExistingHubProps> = ({
                       <Icon className="h-5 w-5" />
                     </span>
                     <span className="font-mono-data text-[11px] uppercase tracking-wider font-semibold text-[#706E6B]">
-                      {opt.tier}
+                      {opt.moduleTag}
                     </span>
                   </div>
                   <span className="font-mono-data text-[10px] uppercase font-semibold px-2.5 py-1 rounded-full bg-black/5 text-[#0A0A0A]">
@@ -151,7 +151,7 @@ export const StepExistingHub: React.FC<StepExistingHubProps> = ({
           onClick={onFinishProfile}
           className="w-full sm:w-auto min-w-[280px] group flex items-center justify-center gap-2 py-4 px-8 rounded-xl bg-[#0A0A0A] text-white font-display font-semibold text-lg border-2 border-[#0A0A0A] hover:border-[#FF4D1C] shadow-sm hover:shadow-card transition-all duration-200 hover:-translate-y-0.5"
         >
-          <span>Finish — View My Profile</span>
+          <span>Finish and View My Profile</span>
           <ArrowRight className="h-5 w-5 text-white/70 group-hover:text-white group-hover:translate-x-1 transition-all" />
         </button>
 

@@ -36,7 +36,7 @@ export const StepIntroCinematic: React.FC<StepIntroCinematicProps> = ({ onComple
     },
     {
       badge: "OUR PHILOSOPHY",
-      text: "At TradePe, we believe our clients grow — and we grow with them.",
+      text: "At TradePe, we believe our clients grow, and we grow with them.",
     },
   ];
 

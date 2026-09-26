@@ -85,7 +85,7 @@ export const StepSignIn: React.FC<StepSignInProps> = ({ onContinue, onBack }) =>
           </span>
         </div>
         <h1 className="font-display font-bold text-4xl sm:text-5xl text-[#0A0A0A] tracking-tight leading-[1.1] mb-3">
-          Hi — a few details to get you set up.
+          Hi, a few details to get you set up.
         </h1>
         <p className="font-body text-base sm:text-lg text-[#706E6B] font-light leading-relaxed">
           Verify your entity credentials to unlock your live trade telemetry and multi-currency rails.

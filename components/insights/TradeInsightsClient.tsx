@@ -249,7 +249,7 @@ export const TradeInsightsClient: React.FC = () => {
 
           <div className="space-y-3 font-body text-sm sm:text-base text-brand-dark/90 leading-relaxed bg-brand-bg p-5 sm:p-6 rounded-xl border border-black/10">
             <p>
-              The <strong>Expansion Credit Score</strong> is a portable, cryptographically verifiable trade underwriting index continuously compiled from your real transaction telemetry on the <TradePeWordmark /> rails—evaluating your customs clearance history, dispute-free deliveries, FX fulfillment punctuality, and buyer payment velocity.
+              The <strong>Expansion Credit Score</strong> is a portable, cryptographically verifiable trade underwriting index continuously compiled from your real transaction telemetry on the <TradePeWordmark /> rails, evaluating your customs clearance history, dispute-free deliveries, FX fulfillment punctuality, and buyer payment velocity.
             </p>
             <p>
               Unlike traditional domestic bank audits that demand heavy local real estate collateral, this portable trade score is recognized across MAD partner institutions and international trade financiers, allowing you to instantly secure low-cost pre-shipment credit lines and invoice financing whenever you enter a new destination market.
@@ -544,7 +544,7 @@ export const TradeInsightsClient: React.FC = () => {
             Ready to generate your own live enterprise telemetry?
           </h3>
           <p className="font-body text-xs sm:text-sm text-brand-muted">
-            Begin with the 5-step Tier 1 Market Readiness Score or set up local currency collection accounts.
+            Begin with the 5-step Market Readiness Score or set up local currency collection accounts.
           </p>
         </div>
 

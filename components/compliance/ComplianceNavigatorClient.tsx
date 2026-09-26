@@ -419,7 +419,7 @@ export const ComplianceNavigatorClient: React.FC = () => {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-8 space-y-3">
                 <span className="font-mono-data text-xs text-[#FF4D1C] font-semibold bg-[#FF4D1C]/15 border border-[#FF4D1C]/30 px-2.5 py-1 rounded-full">
-                  TIER 2 → TIER 3 CROSS-BORDER BRIDGE
+                  COMPLIANCE → SETTLEMENT CROSS-BORDER BRIDGE
                 </span>
                 <h3 className="font-display text-2xl sm:text-3xl font-semibold text-white">
                   Establish Direct Local Settlement in {currentCorridor.targetMarket}
@@ -506,7 +506,7 @@ export const ComplianceNavigatorClient: React.FC = () => {
                       rows={3}
                       value={reviewNotes}
                       onChange={(e) => setReviewNotes(e.target.value)}
-                      placeholder="e.g., HS 6204.42 (Woven cotton apparel) — requesting CEPA origin rule verification..."
+                      placeholder="e.g., HS 6204.42 (Woven cotton apparel): requesting CEPA origin rule verification..."
                       className="w-full rounded-xl border border-black/20 bg-white p-3 font-body text-sm text-[#0A0A0A] placeholder:text-[#52525B]/50 focus:outline-none focus:ring-2 focus:ring-[#FF4D1C]"
                     />
                   </div>
@@ -514,7 +514,7 @@ export const ComplianceNavigatorClient: React.FC = () => {
                   <div className="rounded-xl bg-[#FAF7F0] p-3 text-xs text-[#52525B] font-mono-data">
                     <span>CORRIDOR: {currentCorridor.corridorTitle}</span>
                     <br />
-                    <span>DESK_SLA: 24–48 Business Hours Response</span>
+                    <span>DESK_SLA: 24-48 Business Hours Response</span>
                   </div>
                 </div>
 

@@ -22,7 +22,7 @@ export const ScoreGauge: React.FC<ScoreGaugeProps> = ({
   size = 240,
   strokeWidth = 10,
   label = "Market Readiness Index",
-  sublabel = "Tier 1 Comprehensive Diagnostic",
+  sublabel = "Comprehensive Diagnostic Index",
   corridor = "India → UAE / MENA",
   className,
   animateOnView = true,

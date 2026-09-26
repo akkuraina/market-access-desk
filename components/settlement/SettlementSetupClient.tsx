@@ -36,7 +36,7 @@ const MARKET_CONFIGS: Record<string, MarketConfig> = {
     currency: "British Pound (£)",
     currencyCode: "GBP",
     rails: "Faster Payments & BACS Rails",
-    clearingSpeed: "Instant – T+1",
+    clearingSpeed: "Instant to T+1",
     localAccountFormat: "UK Sort Code (6 digits) & Account Number",
     averageFeeSaving: "65% vs Wire",
     typicalBuyerPreference: "UK commercial buyers expect local domestic invoice settlement in GBP.",
@@ -84,7 +84,7 @@ const MARKET_CONFIGS: Record<string, MarketConfig> = {
     currency: "Euro (€)",
     currencyCode: "EUR",
     rails: "SEPA & SEPA Instant Credit Transfer",
-    clearingSpeed: "Instant – T+1",
+    clearingSpeed: "Instant to T+1",
     localAccountFormat: "European Virtual IBAN (DE...)",
     averageFeeSaving: "60% vs SWIFT Wire",
     typicalBuyerPreference: "EU corporate buyers mandate SEPA-compliant Euro settlement without cross-border fees.",
@@ -132,7 +132,7 @@ export const SettlementSetupClient: React.FC = () => {
           {/* Top Context Breadcrumb */}
           <div className="flex flex-wrap items-center gap-2.5">
             <span className="font-mono-data text-xs font-semibold text-brand-dark bg-black/5 px-3 py-1 rounded-md border border-black/10">
-              TIER 3 ARCHITECTURE · SETTLEMENT HANDOFF
+              SETTLEMENT SETUP · CORRIDOR HANDOFF
             </span>
             <div className="flex items-center gap-1.5 text-xs font-mono-data text-brand-muted">
               <span>TARGET CORRIDOR:</span>
@@ -150,9 +150,9 @@ export const SettlementSetupClient: React.FC = () => {
 
           {/* Natural Handoff Subtitle */}
           <p className="font-body text-base sm:text-lg text-brand-muted leading-relaxed max-w-3xl">
-            You've assessed your readiness and verified compliance — here's how{" "}
+            You&apos;ve assessed your readiness and verified compliance. Here&apos;s how{" "}
             <TradePeWordmark /> makes the money side simple, eliminating correspondent wire hops,
-            lifting 2–4% FX margins, and clearing domestically via AD-1 partner banking rails.
+            lifting 2-4% FX margins, and clearing domestically via AD-1 partner banking rails.
           </p>
 
           {/* Market Switcher Quick Bar */}
@@ -373,7 +373,7 @@ export const SettlementSetupClient: React.FC = () => {
               Real Interbank FX Rates
             </h3>
             <p className="font-body text-xs sm:text-sm text-brand-muted leading-relaxed">
-              No hidden 2–4% exchange rate markups or opaque correspondent intermediary deductions. Access wholesale interbank mid-market spreads with upfront transparency on every conversion.
+              No hidden 2-4% exchange rate markups or opaque correspondent intermediary deductions. Access wholesale interbank mid-market spreads with upfront transparency on every conversion.
             </p>
           </div>
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { TargetMarket, Industry } from "@/lib/readinessScore";
 import { Check } from "lucide-react";
 
@@ -33,20 +33,35 @@ export const StepInputs: React.FC<StepInputsProps> = ({
 }) => {
   const [selectedMarket, setSelectedMarket] = useState<TargetMarket | null>(defaultMarket);
   const [selectedIndustry, setSelectedIndustry] = useState<Industry | null>(defaultIndustry);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
 
   const handleSelectMarket = (market: TargetMarket) => {
     setSelectedMarket(market);
     if (selectedIndustry) {
-      onComplete(market, selectedIndustry);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      timeoutRef.current = setTimeout(() => {
+        onComplete(market, selectedIndustry);
+      }, 250);
     }
   };
 
   const handleSelectIndustry = (industry: Industry) => {
     setSelectedIndustry(industry);
     if (selectedMarket) {
-      onComplete(selectedMarket, industry);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      timeoutRef.current = setTimeout(() => {
+        onComplete(selectedMarket, industry);
+      }, 250);
     }
   };
+
+  const selectionCount = (selectedMarket ? 1 : 0) + (selectedIndustry ? 1 : 0);
 
   return (
     <div className="w-full max-w-4xl mx-auto flex flex-col items-center justify-center text-center px-4 py-8 sm:py-12">
@@ -54,8 +69,8 @@ export const StepInputs: React.FC<StepInputsProps> = ({
       <h1 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl text-[#0A0A0A] tracking-tight leading-[1.08] mb-3">
         Select target expansion corridor &amp; industry
       </h1>
-      <p className="font-body text-base sm:text-lg text-[#706E6B] font-light mb-10 sm:mb-12 max-w-xl">
-        Tap a destination market and product sector to generate your instant readiness diagnostic.
+      <p className="font-body text-base sm:text-lg text-[#706E6B] font-light mb-8 max-w-xl">
+        Select both a destination market and product sector to generate your instant readiness diagnostic ({selectionCount} of 2 chosen).
       </p>
 
       {/* Row 1: Target Expansion Market */}
